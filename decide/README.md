@@ -1,31 +1,35 @@
 # motic.decide
 
-## context 
+## Context 
 
-### time
-
----
-
-### space
-
-#### geometric
-
-#### geo-space
+### Time
 
 ---
 
-### agent
+### Tpace
 
-#### group
+#### Geometric
 
-#### organization
+#### Geospatial
+
+---
+
+### Agent
+
+#### Group
+
+#### Organization
 
 ---
 
 
-## operators
+## Operators
 
-[./operator/motic.decide.operator.md](./operator/motic.decide.operator.md)
+[Operators](./operator/README.md).
+
+---
+
+## Operands
 
 ---
 
