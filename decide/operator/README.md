@@ -22,16 +22,28 @@
 
 ---
 
-## agent
+## Agent
 
-### foaf: hasMember
+### Group
 
-### foaf: memberOf
+#### foaf:hasMember
 
+#### foaf:memberOf
 
-### group
+### Person
 
-### organization
+#### foaf:memberOf
 
+### Organization
+
+#### org:hasUnit
+
+#### org:unitOf
+
+#### org:hasSite
+
+### Site
+
+#### org:siteOf
 
 ---
