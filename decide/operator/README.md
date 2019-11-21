@@ -75,33 +75,35 @@ Indicating that a given value is not equal to the right operand of
  of operand values *MUST* be Constraint instances.
 
 #### [and](http://www.w3.org/ns/odrl/2/and)
+
 The relation is satisfied when all of the Constraints are satisfied.
 
 #### [andSequence](http://www.w3.org/ns/odrl/2/andSequence)
 
-[**andSequence**](https://www.w3.org/TR/odrl-vocab/#term-andSequence)
-
 The relation is satisfied when each of the Constraints are satisfied in
  the order specified.
 
-#### [or](http://www.w3.org/ns/odrl/2/or)
+- [**andSequence**](https://www.w3.org/TR/odrl-vocab/#term-andSequence)
 
-[**or**](https://www.w3.org/TR/odrl-vocab/#term-or)
+#### [or](http://www.w3.org/ns/odrl/2/or)
 
 The relation is satisfied when at least one of the Constraints is
  satisfied.
 
-#### [xone](http://www.w3.org/ns/odrl/2/xone)
-"Only One": [**xone**](https://www.w3.org/TR/odrl-vocab/#term-xone)
+- [**or**](https://www.w3.org/TR/odrl-vocab/#term-or)
 
-The relation is satisfied when only one, and not more, of the Constaints
- is satisfied.
+
+#### [xone](http://www.w3.org/ns/odrl/2/xone)
+"Only One": The relation is satisfied when only one, and not more, of the Constaints
+ is satisfied. 
+
+- [**xone**](https://www.w3.org/TR/odrl-vocab/#term-xone)
 
 ---
 
 ## Time
 
-See: [Time Ontology in OWL](https://www.w3.org/TR/owl-time/).
+- [Time Ontology in OWL](https://www.w3.org/TR/owl-time/).
 
 ### Before
 ### After
