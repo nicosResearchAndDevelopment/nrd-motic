@@ -596,7 +596,7 @@ The group `exA:admin` (belonging to example-company "A") has three
 | "exA:rumpelstilz"  | `memberOf`  | "exB:maintainerGroup"  | false |
 
 
-### Organization
+## Organization
 
 `org:Organization` grounded on `foaf:Organization`.
 
@@ -670,5 +670,51 @@ The group `exA:admin` (belonging to example-company "A") has three
 
 ```
 ```
+
+---
+
+
+## Net
+
+### NRS
+
+Network Reference System.
+
+```
+"ipv4"
+```
+
+### Address
+
+```context
+["178.10.10.42"]
+```
+
+### Range
+
+```context
+["178.10.10.1"]--["178.10.10.256"]
+```
+
+### net:inside
+
+```pseudocode
+inside(["178.10.10.42"], ["178.10.10.1", "178.10.10.256"]) === true
+```
+|   |   |   | is|  
+|---|---|---|:--|
+| ["178.10.10.42"]   | `inside` | ["178.10.10.1", "178.10.10.256"]       | true  |
+| ["178.10.**42**.42"]   | `inside` | ["178.10.10.1", "178.10.10.256"]   | false  |
+
+### net:contains
+
+```pseudocode
+contains(["178.10.10.1", "178.10.10.256"], ["178.10.10.42"]) === true
+contains(["178.10.10.1", "178.10.10.256"], ["178.10.42.42"]) === false
+```
+|   |   |   | is|  
+|---|---|---|:--|
+| ["178.10.10.1", "178.10.10.256"]   | `contains` | ["178.10.10.42"]   | true   |
+| ["178.10.10.1", "178.10.10.256"]   | `contains` | ["178.10.**42**.42"]   | false  |
 
 ---
