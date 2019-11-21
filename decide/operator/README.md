@@ -131,7 +131,7 @@ Two additional relations, `In` and `Disjoint`:
 Disjoint(i, j) === (Before(i, j) || After(i, j))
 ```
 
-### Before
+### time:Before
 
 #### Examples
 
@@ -182,20 +182,20 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 
 ---
 
-### After
-### Meets
-### MetBy
-### Overlaps
-### OverlappedBy
-### Starts
-### StartedBy
-### During
-### Contains
-### Finishes
-### FinishedBy
-### Equals
-### In
-### Disjoint
+### time:After
+### time:Meets
+### time:MetBy
+### time:Overlaps
+### time:OverlappedBy
+### time:Starts
+### time:StartedBy
+### time:During
+### time:Contains
+### time:Finishes
+### time:FinishedBy
+### time:Equals
+### time:In
+### time:Disjoint
 
 
 ---
