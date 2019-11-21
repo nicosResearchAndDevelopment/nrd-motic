@@ -105,21 +105,7 @@ The relation is satisfied when at least one of the Constraints is
 
 - [Time Ontology in OWL](https://www.w3.org/TR/owl-time/).
 
-### Before
-### After
-### Meets
-### MetBy
-### Overlaps
-### OverlappedBy
-### Starts
-### StartedBy
-### During
-### Contains
-### Finishes
-### FinishedBy
-### Equals
-### _In_
-### _Disjoint_
+
 
 ```
                       |      i    |        j
@@ -144,6 +130,73 @@ Two additional relations, `In` and `Disjoint`:
       In(i, j) === (Starts(i, j) || During(i, j) || Finishes(i, j))
 Disjoint(i, j) === (Before(i, j) || After(i, j))
 ```
+
+### Before
+
+#### Examples
+
+##### A `time:Instant` is `before` a `time:Interval`.
+
+###### Pseudo code
+```
+Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) === true
+```
+
+###### ODRL
+```odrl
+{
+    //...
+    "constraint": [{
+               "leftOperand": {
+                    "@type": "time:Instant",
+                    "hasBeginning": {
+                        "@type": "time:Instant",
+                        "inXSDDateTime": {
+                            "@type": "xsd:dateTime"
+                            "@value": "2019-01-05T00:00:00Z"
+                        }
+                    }
+               },
+               "operator": "Before",
+               "rightOperand":  {
+                    "@type": "time:Interval",
+                    "hasBeginning": {
+                        "@type": "time:Instant",
+                        "inXSDDateTime": {
+                            "@type": "xsd:dateTime"
+                            "@value": "2019-02-01T00:00:00Z"
+                        }
+                    },
+                    "hasEnd": {
+                        "@type": "time:Instant",
+                        "inXSDDateTime": {
+                            "@type": "xsd:dateTime"
+                            "@value": "2019-03-01T00:00:00Z"
+                        }
+                    }
+               }
+           }]
+        //...
+}
+```
+
+---
+
+### After
+### Meets
+### MetBy
+### Overlaps
+### OverlappedBy
+### Starts
+### StartedBy
+### During
+### Contains
+### Finishes
+### FinishedBy
+### Equals
+### In
+### Disjoint
+
 
 ---
 
