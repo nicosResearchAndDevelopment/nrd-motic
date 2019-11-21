@@ -693,18 +693,18 @@ Network Reference System.
 ### Range
 
 ```context
-["178.10.10.1"]--["178.10.10.256"]
+["178.10.10.1"]--["178.10.10.255"]
 ```
 
 ### net:inside
 
 ```pseudocode
-inside(["178.10.10.42"], ["178.10.10.1", "178.10.10.256"]) === true
+inside(["178.10.10.42"], ["178.10.10.1", "178.10.10.255"]) === true
 ```
 |   |   |   | is|  
 |---|---|---|:--|
-| ["178.10.10.42"]   | `inside` | ["178.10.10.1", "178.10.10.256"]       | true  |
-| ["178.10.**42**.42"]   | `inside` | ["178.10.10.1", "178.10.10.256"]   | false  |
+| ["178.10.10.42"]     | `inside` | ["178.10.10.1", "178.10.10.255"] | true  |
+| ["178.10.**42**.42"] | `inside` | ["178.10.10.1", "178.10.10.255"] | false  |
 
 ### net:contains
 
@@ -714,7 +714,45 @@ contains(["178.10.10.1", "178.10.10.256"], ["178.10.42.42"]) === false
 ```
 |   |   |   | is|  
 |---|---|---|:--|
-| ["178.10.10.1", "178.10.10.256"]   | `contains` | ["178.10.10.42"]   | true   |
-| ["178.10.10.1", "178.10.10.256"]   | `contains` | ["178.10.**42**.42"]   | false  |
+| ["178.10.10.1", "178.10.10.256"] | `contains` | ["178.10.10.42"]     | true   |
+| ["178.10.10.1", "178.10.10.256"] | `contains` | ["178.10.**42**.42"] | false  |
+
+---
+
+## Id
+
+Operators, specially designed for handling identificator related problems.
+
+### IRS
+
+Identificator Reference System.
+
+```
+"mac"
+"opcua:NodeId"
+```
+
+### id:equals
+### id:startsWith
+### id:endsWith
+### id:contains
+### id:regex
+
+### Hardware Address
+
+#### MAC
+
+```pseudocode
+id:equals("C8-5B-76-B5-43-2B", "C8-5B-76-B5-43-2B") === true
+id:startsWith("C8-5B-76-B5-43-2B", "C8-5B-76") === true
+id:endsWith("C8-5B-76-B5-43-2B", "B5-43-2B") === true
+id:contains("C8-5B-76-B5-43-2B", "5B-76-B5") === true
+```
+|   |   |   | is|  
+|---|---|---|:--|
+| "C8-5B-76-B5-43-2B" | `equals`     | "C8-5B-76-B5-43-2B" | true   |
+| "C8-5B-76-B5-43-2B" | `startsWith` | "C8-5B-76"          | true   |
+| "C8-5B-76-B5-43-2B" | `endsWith`   | "B5-43-2B"          | true   |
+| "C8-5B-76-B5-43-2B" | `contains`   | "5B-76-B5"          | true   |
 
 ---
