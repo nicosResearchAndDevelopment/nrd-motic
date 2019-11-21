@@ -6,6 +6,7 @@
 
 ---
 
+
 ### Space
 
 #### Geometric
@@ -14,35 +15,50 @@
 
 ---
 
-### Agent
 
-#### Group
+### Party
 
-#### Organization
+#### Agent
+
+##### Group
+
+##### Organization
+
+##### Role
+
+---
+
+## Policy
+
+### Rule
+
+### Constraint
+
+### Operator
+
+[Find some Operators here...](./operator/README.md).
 
 ---
 
-
-## Operators
-
-[Operators](./operator/README.md).
-
----
 
 ## Operands
 
 ---
 
-## work with
 
-### access control
+## Use case
 
----
-
-### usage control
+### Access Control
 
 ---
 
-### data flow control
+### Usage Control
+
+Use case [motic.decide "*IDS usage control*"](./ids/ids-usage-control/README.md) regarding specifications done by
+ [International Data Spaces (**IDS**)](https://https://www.internationaldataspaces.org/).
+
+---
+
+### Data Flow Control
 
 ---
