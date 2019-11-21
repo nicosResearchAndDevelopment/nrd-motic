@@ -1,5 +1,7 @@
 # motic.decide "*IDS usage control*"
 
-## ids:eq
+## Binary Operators
+
+### ids:eq
 
 ---
