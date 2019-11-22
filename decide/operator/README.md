@@ -7,6 +7,8 @@ Please follow, to be informed on editings...
 
 ## ODRL
 
+Prefix: `odrl`. 
+
 See also:
 
 - [ODRL Information Model 2.2](https://www.w3.org/TR/odrl-model/)
@@ -17,23 +19,23 @@ See also:
 
 [constraintRelationalOperators](https://www.w3.org/TR/odrl-vocab/#constraintRelationalOperators)
 
-#### [eq](http://www.w3.org/ns/odrl/2/eq)
+#### [odrl:eq](http://www.w3.org/ns/odrl/2/eq)
 Indicating that a given value equals the right operand of
  the Constraint.
 
-#### [gt](http://www.w3.org/ns/odrl/2/gt)
+#### [odrl:gt](http://www.w3.org/ns/odrl/2/gt)
 Indicating that a given value is greater than the right operand of
  the Constraint.
 
-#### [gteq](http://www.w3.org/ns/odrl/2/gteq)
+#### [odrl:gteq](http://www.w3.org/ns/odrl/2/gteq)
 Indicating that a given value is greater than or equal to the right
  operand of the Constraint.
 
-#### [hasPart](http://www.w3.org/ns/odrl/2/hasPart)
+#### [odrl:hasPart](http://www.w3.org/ns/odrl/2/hasPart)
 A set-based operator indicating that a given value contains the right
  operand of the Constraint.
 
-#### [isA](http://www.w3.org/ns/odrl/2/isA)
+#### [odrl:isA](http://www.w3.org/ns/odrl/2/isA)
 A set-based operator indicating that a given value is an instance of
  the right operand of the Constraint.
 
@@ -41,19 +43,19 @@ A set-based operator indicating that a given value is an instance of
 A set-based operator indicating that a given value is all of the
  right operand of the Constraint.
 
-#### [isAnyOf](http://www.w3.org/ns/odrl/2/isAnyOf)
+#### [odrl:isAnyOf](http://www.w3.org/ns/odrl/2/isAnyOf)
 A set-based operator indicating that a given value is any of the
  right operand of the Constraint.
 
-#### [isNoneOf](http://www.w3.org/ns/odrl/2/isNoneOf)
+#### [odrl:isNoneOf](http://www.w3.org/ns/odrl/2/isNoneOf)
 A set-based operator indicating that a given value is none of the
  right operand of the Constraint.
 
-#### [isPartOf](http://www.w3.org/ns/odrl/2/isPartOf)
+#### [odrl:isPartOf](http://www.w3.org/ns/odrl/2/isPartOf)
 A set-based operator indicating that a given value is contained by the
  right operand of the Constraint.
 
-#### [lt](http://www.w3.org/ns/odrl/2/lt)
+#### [odrl:lt](http://www.w3.org/ns/odrl/2/lt)
 Indicating that a given value is less than the right operand of the
  Constraint.
 
@@ -61,7 +63,7 @@ Indicating that a given value is less than the right operand of the
 Indicating that a given value is less than or equal to the right
  operand of the Constraint.
 
-#### [neq](http://www.w3.org/ns/odrl/2/neq)
+#### [odrl:neq](http://www.w3.org/ns/odrl/2/neq)
 Indicating that a given value is not equal to the right operand of
  the Constraint.
 
@@ -74,35 +76,36 @@ Indicating that a given value is not equal to the right operand of
 > This property *MUST* only be used for Logical Constraints, and the list
  of operand values *MUST* be Constraint instances.
 
-#### [and](http://www.w3.org/ns/odrl/2/and)
+#### [odrl:and](http://www.w3.org/ns/odrl/2/and)
 
 The relation is satisfied when all of the Constraints are satisfied.
 
-#### [andSequence](http://www.w3.org/ns/odrl/2/andSequence)
+#### [odrl:andSequence](http://www.w3.org/ns/odrl/2/andSequence)
 
 The relation is satisfied when each of the Constraints are satisfied in
  the order specified.
 
-- [**andSequence**](https://www.w3.org/TR/odrl-vocab/#term-andSequence)
+- [**odrl:andSequence**](https://www.w3.org/TR/odrl-vocab/#term-andSequence)
 
-#### [or](http://www.w3.org/ns/odrl/2/or)
+#### [odrl:or](http://www.w3.org/ns/odrl/2/or)
 
 The relation is satisfied when at least one of the Constraints is
  satisfied.
 
-- [**or**](https://www.w3.org/TR/odrl-vocab/#term-or)
+- [**odrl:or**](https://www.w3.org/TR/odrl-vocab/#term-or)
 
 
-#### [xone](http://www.w3.org/ns/odrl/2/xone)
+#### [odrl:xone](http://www.w3.org/ns/odrl/2/xone)
 "Only One": The relation is satisfied when only one, and not more, of the Constaints
  is satisfied. 
 
-- [**xone**](https://www.w3.org/TR/odrl-vocab/#term-xone)
+- [**odrl:xone**](https://www.w3.org/TR/odrl-vocab/#term-xone)
 
 ---
 
 ## Time
 
+time
 - [Time Ontology in OWL](https://www.w3.org/TR/owl-time/).
 
 
@@ -133,17 +136,17 @@ Disjoint(i, j) === (Before(i, j) || After(i, j))
 
 ### time:Before
 
-#### Examples
+##### Example
 
-##### A `time:Instant` is `before` a `time:Interval`.
+A `time:Instant` is `before` a `time:Interval`.
 
 ###### Pseudo code
-```
+```pseudocode
 Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) === true
 ```
 
 ###### ODRL
-```odrl
+```json5
 {
     //...
     "constraint": [{
@@ -152,25 +155,25 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
                     "hasBeginning": {
                         "@type": "time:Instant",
                         "inXSDDateTime": {
-                            "@type": "xsd:dateTime"
+                            "@type": "xsd:dateTime",
                             "@value": "2019-01-05T00:00:00Z"
                         }
                     }
                },
-               "operator": "Before",
+               "operator": "time:Before",
                "rightOperand":  {
                     "@type": "time:Interval",
                     "hasBeginning": {
                         "@type": "time:Instant",
                         "inXSDDateTime": {
-                            "@type": "xsd:dateTime"
+                            "@type": "xsd:dateTime",
                             "@value": "2019-02-01T00:00:00Z"
                         }
                     },
                     "hasEnd": {
                         "@type": "time:Instant",
                         "inXSDDateTime": {
-                            "@type": "xsd:dateTime"
+                            "@type": "xsd:dateTime",
                             "@value": "2019-03-01T00:00:00Z"
                         }
                     }
@@ -183,6 +186,19 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 ---
 
 ### time:After
+
+##### Example
+
+A `time:Instant` is `after` a `time:Interval`.
+
+###### Pseudo code
+```pseudocode
+After(["2019-04-01T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) === true
+```
+| time:TemporalEntity  |   | time:TemporalEntity | is |  
+|:---|---|:---|:--|
+| ["2019-04-01T00:00:00Z"] | `After`     | ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"] | true   |
+
 ### time:Meets
 ### time:MetBy
 ### time:Overlaps
@@ -193,7 +209,21 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 ### time:Contains
 ### time:Finishes
 ### time:FinishedBy
+
 ### time:Equals
+
+##### Example
+
+A `time:Instant` `equal`s a `time:Instant`.
+
+###### Pseudo code
+```pseudocode
+Equals(["2019-04-01T00:00:00Z"], ["2019-04-01T00:00:00Z"]) === true
+```
+| time:TemporalEntity  |   | time:TemporalEntity | is |  
+|:---|---|:---|:--|
+| ["2019-04-01T00:00:00Z"] | `After`     | ["2019-04-01T00:00:00Z"] | true   |
+
 ### time:In
 ### time:Disjoint
 
@@ -203,7 +233,9 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 
 ## Geometry
 
-### equals
+- Prefix: `geom`
+
+### geom:equals
 
 Two sets _A_ and _B_ are equal, if for every point _a_ in _A_ and every
  point _b_ in _B_, also _a_ is in _B_ and _b_ is in _A_.
@@ -211,7 +243,7 @@ Two sets _A_ and _B_ are equal, if for every point _a_ in _A_ and every
 - symmetric
 
 
-### intersects
+### geom:intersects
 
 A set _A_ intersects a set _B_, if there exists a point _p_, such that
  _p_ is in _A_ and also in _B_.
@@ -220,7 +252,7 @@ A set _A_ intersects a set _B_, if there exists a point _p_, such that
 - opposite of disjoint
 
 
-### disjoint
+### geom:disjoint
 
 A set _A_ is disjoint with a set _B_, if there exists no point _p_,
  such that _p_ is in _A_ and also in _B_.
@@ -229,7 +261,7 @@ A set _A_ is disjoint with a set _B_, if there exists no point _p_,
  - opposite of intersects
 
 
-### contains
+### geom:contains
 
 A set _A_ contains a set _B_, if for every point _b_ in _B_, also _b_
  is in _A_.
@@ -238,7 +270,7 @@ A set _A_ contains a set _B_, if for every point _b_ in _B_, also _b_
 - if _A_ contains _B_ and _B_ contains _A_, _A_ and _B_ are equal.
 
 
-### touches
+### geom:touches
 
 _Two sets are touching, if they intersect and their intersection only
  includes their boundaries.
@@ -251,7 +283,7 @@ _Two sets are touching, if they intersect and their intersection only
 - symmetric
 
 
-### overlaps
+### geom:overlaps
 
 A set _A_ overlaps a set _B_, if _A_ intersects _B_ but _A_ does
  not touch _B_.
@@ -263,7 +295,7 @@ A set _A_ overlaps a set _B_, if _A_ intersects _B_ but _A_ does
 
 #### Point
 
-##### disjoint
+##### geom:disjoint
 
 ```
     . i
@@ -274,7 +306,7 @@ A set _A_ overlaps a set _B_, if _A_ intersects _B_ but _A_ does
 |---|---|---|:--|
 | **i**   | `disjoint` | **j**   | true  |
 
-##### equals
+##### geom:equals
 
 ```
     (.) i, j
@@ -289,7 +321,7 @@ is in the same place as
 
 #### Polygon, (n > 2)
 
-##### disjoint
+##### geom:disjoint
 
 ```
     .-----------.
@@ -312,7 +344,7 @@ is in the same place as
 
 ---
 
-##### touches
+##### geom:touches
 
 ```
     .-----------.
@@ -347,7 +379,7 @@ is in the same place as
 
 ---
 
-##### overlaps
+##### geom:overlaps
 
 ```
     .-----------.
@@ -367,7 +399,7 @@ is in the same place as
 
 ---
 
-##### contains
+##### geom:contains
 
 ```
    (.)---------(.)
@@ -385,7 +417,7 @@ is in the same place as
 
 ---
 
-##### equals
+##### geom:equals
 
 ```
    (.)---------(.)
@@ -401,9 +433,9 @@ is in the same place as
 
 ---
 
-#### line
+#### Line
 
-##### disjoint
+##### geom:disjoint
 
 ```
                   (.)
@@ -421,7 +453,7 @@ is in the same place as
 |---|---|---|:--|
 | **i** | `disjoint` | **j** | true |
 
-##### touches
+##### geom:touches
 
 ```
     .          (.)
@@ -451,7 +483,7 @@ is in the same place as
 |---|---|---|:--|
 | **i** | `touches` | **j** | true |
 
-##### intersects
+##### geom:intersects
 
 ```
     .    (.)
@@ -470,7 +502,7 @@ is in the same place as
 | **i** | `overlaps`   | **j** | false |
 
 
-##### overlaps
+##### geom:overlaps
 
 ```
     .
@@ -493,7 +525,7 @@ is in the same place as
 
 ---
 
-##### contains
+##### geom:contains
 
 ```
     .
@@ -529,7 +561,7 @@ is in the same place as
 
 ---
 
-##### equals
+##### geom:equals
 
 ```
     .
@@ -552,7 +584,9 @@ is in the same place as
 
 ## Agent
 
-### memberOf
+- Prefix: `foaf`
+
+### foaf:memberOf
 
 Any `foaf:Agent`. can be member of some other agent.
 
@@ -561,7 +595,7 @@ Any `foaf:Agent`. can be member of some other agent.
 
 `foaf:Group` is a `foaf:Agent`.
 
-### hasMember
+### foaf:hasMember
 
 The group `exA:users` contains all users of example-company "A".
 
@@ -593,6 +627,7 @@ The group `exA:admin` (belonging to example-company "A") has three
 | "exA:adminGroup"   | `hasMember` | "exA:zaphod"           | true  |
 | "exA:adminGroup"   | `hasMember` | "exA:bob"              | false |
 | "exA:ford"         | `memberOf`  | "exA:adminGroup"       | true  |
+| *but*              |             |                        |       |
 | "exA:rumpelstilz"  | `memberOf`  | "exB:maintainerGroup"  | false |
 
 
@@ -600,13 +635,14 @@ The group `exA:admin` (belonging to example-company "A") has three
 
 `org:Organization` grounded on `foaf:Organization`.
 
+- Prefix: `org`
 - [vocab-org](https://www.w3.org/TR/vocab-org/)
 - [term_Organization](http://xmlns.com/foaf/spec/#term_Organization)
 
-### hasSubOrganization
+
+### org:hasSubOrganization
 
 ```
-
 (companyA)--.
             |
             .--(companyB)
@@ -621,7 +657,7 @@ The group `exA:admin` (belonging to example-company "A") has three
 | "urn:companyA"   | `subOrganizationOf`  | "urn:companyB" | false |
 
 
-### hasUnit
+### org:hasUnit
 
 |   |   |   | is|
 |---|---|---|:--|
@@ -651,7 +687,7 @@ The group `exA:admin` (belonging to example-company "A") has three
                
 ```
 
-### hasSite
+### org:hasSite
 
 |   |   |   | is|  
 |---|---|---|:--|
@@ -661,12 +697,13 @@ The group `exA:admin` (belonging to example-company "A") has three
 | "urn:nirvana"    | `siteOf`  | "urn:companyA"   | true  |
 | "urn:wonderland" | `siteOf`  | "urn:companyA"   | false |
 
-### hasPrimarySite
+
+### org:hasPrimarySite
 
 ```
 ```
 
-### hasRegisteredSite
+### org:hasRegisteredSite
 
 ```
 ```
@@ -676,6 +713,8 @@ The group `exA:admin` (belonging to example-company "A") has three
 
 ## Net
 
+- Prefix: `net`
+ 
 ### NRS
 
 Network Reference System.
@@ -740,7 +779,9 @@ Identificator Reference System.
 
 ### Hardware Address
 
-#### MAC
+#### MAC-Address
+
+- [`MAC-Address`, wiki, en](https://en.wikipedia.org/wiki/MAC_address)
 
 ```pseudocode
 id:equals("C8-5B-76-B5-43-2B", "C8-5B-76-B5-43-2B") === true
