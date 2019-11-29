@@ -39,7 +39,7 @@ A set-based operator indicating that a given value contains the right
 A set-based operator indicating that a given value is an instance of
  the right operand of the Constraint.
 
-#### [isAllOf](http://www.w3.org/ns/odrl/2/isAllOf)
+#### [odrl:isAllOf](http://www.w3.org/ns/odrl/2/isAllOf)
 A set-based operator indicating that a given value is all of the
  right operand of the Constraint.
 
@@ -59,7 +59,7 @@ A set-based operator indicating that a given value is contained by the
 Indicating that a given value is less than the right operand of the
  Constraint.
 
-#### [lteq](http://www.w3.org/ns/odrl/2/lteq)
+#### [odrl:lteq](http://www.w3.org/ns/odrl/2/lteq)
 Indicating that a given value is less than or equal to the right
  operand of the Constraint.
 
