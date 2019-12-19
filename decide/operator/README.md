@@ -222,7 +222,7 @@ Equals(["2019-04-01T00:00:00Z"], ["2019-04-01T00:00:00Z"]) === true
 ```
 | time:TemporalEntity  |   | time:TemporalEntity | is |  
 |:---|---|:---|:--|
-| ["2019-04-01T00:00:00Z"] | `After`     | ["2019-04-01T00:00:00Z"] | true   |
+| ["2019-04-01T00:00:00Z"] | `Equals`     | ["2019-04-01T00:00:00Z"] | true   |
 
 ### time:In
 ### time:Disjoint
