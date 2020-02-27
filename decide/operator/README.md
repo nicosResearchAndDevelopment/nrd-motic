@@ -734,7 +734,7 @@ Network Reference System.
 ["178.10.10.1"]-["178.10.10.255"]
 ```
 
-### net:isA
+### net:is
 
 Is a given string a valid IPv$-Address?
 
