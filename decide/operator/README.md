@@ -142,11 +142,11 @@ A `time:Instant` is `before` a `time:Interval`.
 
 ###### Pseudo code
 ```pseudocode
-Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) === true
+Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) = true
 ```
 
 ###### ODRL
-```json5
+```json
 {
     //...
     "constraint": [{
@@ -193,7 +193,7 @@ A `time:Instant` is `after` a `time:Interval`.
 
 ###### Pseudo code
 ```pseudocode
-After(["2019-04-01T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) === true
+After(["2019-04-01T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) = true
 ```
 | time:TemporalEntity  |   | time:TemporalEntity | is |  
 |:---|---|:---|:--|
@@ -218,15 +218,14 @@ A `time:Instant` `equal`s a `time:Instant`.
 
 ###### Pseudo code
 ```pseudocode
-Equals(["2019-04-01T00:00:00Z"], ["2019-04-01T00:00:00Z"]) === true
+Equals(["2019-04-01T00:00:00Z"], ["2019-04-01T00:00:00Z"]) = true
 ```
 | time:TemporalEntity  |   | time:TemporalEntity | is |  
 |:---|---|:---|:--|
-| ["2019-04-01T00:00:00Z"] | `Equals`     | ["2019-04-01T00:00:00Z"] | true   |
+| [ "2019-04-01T00:00:00Z" ] | `Equals`     | [ "2019-04-01T00:00:00Z" ] | true   |
 
 ### time:In
 ### time:Disjoint
-
 
 ---
 
@@ -732,13 +731,46 @@ Network Reference System.
 ### Range
 
 ```context
-["178.10.10.1"]--["178.10.10.255"]
+["178.10.10.1"]-["178.10.10.255"]
+```
+
+### net:isA
+
+Is a given string a valid IPv$-Address?
+
+```pseudocode
+isA(["178.10.10.42"], "ipv4") = true
+```
+
+|   |   |   | is|  
+|---|---|---|:--|
+| ["178.10.10.42"]         | `is` | "ipv4"  | true  |
+| ["178.10.10.**424242**"] | `is` | "ipv4"  | false |
+| ["178.10.10.42"]         | `is` | "ipv6"  | false |
+
+###### ODRL
+```json
+{
+    //...
+    "constraint": [{
+               "leftOperand": {
+                    "@type": "net:address",
+                    "@value": ["178.10.10.42"]
+               },
+               "operator": "net:is",
+               "rightOperand":  {
+                    "@type": "net:type",
+                    "@value": "ipv4"
+               }
+           }]
+        //...
+}
 ```
 
 ### net:inside
 
 ```pseudocode
-inside(["178.10.10.42"], ["178.10.10.1", "178.10.10.255"]) === true
+inside(["178.10.10.42"], ["178.10.10.1", "178.10.10.255"]) = true
 ```
 |   |   |   | is|  
 |---|---|---|:--|
@@ -748,13 +780,46 @@ inside(["178.10.10.42"], ["178.10.10.1", "178.10.10.255"]) === true
 ### net:contains
 
 ```pseudocode
-contains(["178.10.10.1", "178.10.10.256"], ["178.10.10.42"]) === true
-contains(["178.10.10.1", "178.10.10.256"], ["178.10.42.42"]) === false
+contains(["178.10.10.1", "178.10.10.256"], ["178.10.10.42"]) = true
+contains(["178.10.10.1", "178.10.10.256"], ["178.10.42.42"]) = false
 ```
 |   |   |   | is|  
 |---|---|---|:--|
 | ["178.10.10.1", "178.10.10.256"] | `contains` | ["178.10.10.42"]     | true   |
 | ["178.10.10.1", "178.10.10.256"] | `contains` | ["178.10.**42**.42"] | false  |
+
+---
+
+## Regular Expression
+
+- prefix : regex
+
+### regex:match
+
+Is a given string a valid Email-Address?
+
+```pseudocode
+match("GAIAboX@nicos-ag.com", "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]+$") = true
+```
+
+###### ODRL
+```json
+{
+    //...
+    "constraint": [{
+               "leftOperand": {
+                    "@type": "xsd:string:address",
+                    "@value": "GAIAboX@nicos-ag.com"
+               },
+               "operator": "regex:match",
+               "rightOperand":  {
+                    "@type": "xsd:string",
+                    "@value": "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]+$"
+               }
+           }]
+        //...
+}
+```
 
 ---
 
@@ -766,9 +831,14 @@ Operators, specially designed for handling identificator related problems.
 
 Identificator Reference System.
 
-```
+```draft enum
 "mac"
 "opcua:NodeId"
+"mail-address"
+"uri"
+"url"
+"ipv4"
+"ipv6"
 ```
 
 ### id:equals
@@ -784,10 +854,10 @@ Identificator Reference System.
 - [`MAC-Address`, wiki, en](https://en.wikipedia.org/wiki/MAC_address)
 
 ```pseudocode
-id:equals("C8-5B-76-B5-43-2B", "C8-5B-76-B5-43-2B") === true
-id:startsWith("C8-5B-76-B5-43-2B", "C8-5B-76") === true
-id:endsWith("C8-5B-76-B5-43-2B", "B5-43-2B") === true
-id:contains("C8-5B-76-B5-43-2B", "5B-76-B5") === true
+id:equals("C8-5B-76-B5-43-2B", "C8-5B-76-B5-43-2B") = true
+id:startsWith("C8-5B-76-B5-43-2B", "C8-5B-76") = true
+id:endsWith("C8-5B-76-B5-43-2B", "B5-43-2B") = true
+id:contains("C8-5B-76-B5-43-2B", "5B-76-B5") = true
 ```
 |   |   |   | is|  
 |---|---|---|:--|
