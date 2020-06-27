@@ -17,6 +17,7 @@ Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
 
 ## [organization](./organization.md)
 
+## [weather](./weather.md)
 
 ## Regular Expression
 

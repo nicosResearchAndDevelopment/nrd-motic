@@ -77,6 +77,23 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 }
 ```
 
+#### fno
+```turtle
+gbx:timeBeforeExecution
+    a                    fno:Execution ;
+	# TODO: is rhis the right way to express the parameters?
+	# time, i
+    gbx:timeLeftOperand  [ fno:type          time:TemporalEntity ;
+                           time:hasBeginning "2020-06-24T15:35:19.42Z" ;
+                           time:hasEnd       "2020-06-24T15:35:19.42Z" ; ] ;
+    fno:executes         gbx:timeBeforeFunction ;
+	#time, j
+    gbx:timeRightOperand [ fno:type          time:TemporalEntity ;
+                           time:hasBeginning "2020-06-24T15:35:19.43Z" ;
+                           time:hasEnd       "2020-06-24T15:35:19.43Z" ; ] ;
+.
+```
+
 ---
 
 ### time:After
