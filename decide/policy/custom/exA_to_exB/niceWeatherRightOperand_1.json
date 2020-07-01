@@ -1,0 +1,20 @@
+[
+  {
+    "and": {
+      "@list": [
+        {
+          "leftOperand": "weather:temperature",
+          "operator": "odrl:gt",
+          "rightOperand": 20,
+          "unit": "weather:celsius"
+        },
+        {
+          "leftOperand": "weather:temperature",
+          "operator": "odrl:lt",
+          "rightOperand": 32,
+          "unit": "weather:celsius"
+        }
+      ]
+    }
+  }
+]
