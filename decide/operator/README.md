@@ -21,6 +21,8 @@ Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
 
 ## [weather](./weather.md)
 
+## [net](./net.md)
+
 ## Regular Expression
 
 - prefix : regex
