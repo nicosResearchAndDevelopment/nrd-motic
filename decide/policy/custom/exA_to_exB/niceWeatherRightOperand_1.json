@@ -1,50 +1,61 @@
-[
-  {
-    "REMARK_1": "NLP :: weather.temperature has to be 20 Celsius < temperature < 32 Celsius",
-    "REMARK_2": "OR",
-    "REMARK_3": "NLP :: sun shines 120 min in duration of 3 h AND weather.rainfall < 4 mm"
-  },
-  {
-    "odrl:or": {
-      "@list": [
-        {
-          "odrl:and": {
-            "@list": [
-              {
-                "leftOperand": "weather:temperature",
-                "operator": "odrl:gt",
-                "rightOperand": 20,
-                "unit": "weather:celsius"
-              },
-              {
-                "leftOperand": "weather:temperature",
-                "operator": "odrl:lt",
-                "rightOperand": 32,
-                "unit": "weather:celsius"
-              }
-            ]
-          }
-        },
-        {
-          "odrl:and": {
-            "@list": [
-              {
-                "leftOperand": "weather:sunMinutesInThreeHours",
-                "operator": "odrl:gt",
-                "rightOperand": 120,
-                "unit": "weather:minute"
-              },
-              {
-                "leftOperand": "weather:rainfall",
-                "operator": "odrl:lt",
-                "rightOperand": 4,
-                "REM": "unit :: OR si:m^-3",
-                "unit": "weather:millimeter"
-              }
-            ]
-          }
-        }
-      ]
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "weather": "http://www.nicos-rd.com/weather/"
     }
-  }
-]
+
+  ],
+  "uid": "{{root}}/decide/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json",
+  "constraint": [
+    {
+      "REMARK_1": "NLP :: weather.temperature has to be 20 Celsius < temperature < 32 Celsius",
+      "REMARK_2": "OR",
+      "REMARK_3": "NLP :: sun shines 120 min in duration of 3 h AND weather.rainfall < 4 mm"
+    },
+    {
+      "odrl:or": {
+        "@list": [
+          {
+            "odrl:and": {
+              "@list": [
+                {
+                  "leftOperand": "weather:temperature",
+                  "operator": "odrl:gt",
+                  "rightOperand": 20,
+                  "unit": "weather:celsius"
+                },
+                {
+                  "leftOperand": "weather:temperature",
+                  "operator": "odrl:lt",
+                  "rightOperand": 32,
+                  "unit": "weather:celsius"
+                }
+              ]
+            }
+          },
+          {
+            "odrl:and": {
+              "@list": [
+                {
+                  "leftOperand": "weather:sunMinutesInThreeHours",
+                  "operator": "odrl:gt",
+                  "rightOperand": 120,
+                  "unit": "weather:minute"
+                },
+                {
+                  "leftOperand": "weather:rainfall",
+                  "operator": "odrl:lt",
+                  "rightOperand": 4,
+                  "REM": "unit :: OR si:m^-3",
+                  "unit": "weather:millimeter"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+

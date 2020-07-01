@@ -1,8 +1,15 @@
 {
-  "@id": "{{root}}/policy/rule/constraint/operator/weather_is_nice_1.json",
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "weather": "http://www.nicos-rd.com/weather/"
+    }
+
+  ],
+  "uid": "{{root}}/decide/policy/rule/constraint/operator/weather_is_nice_1.json",
   "leftOperand": "weather:current",
   "operator": "weather:is",
   "rightOperand": {
-    "@id": "{{root}}/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json"
+    "uid": "{{root}}/decide/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json"
   }
 }
