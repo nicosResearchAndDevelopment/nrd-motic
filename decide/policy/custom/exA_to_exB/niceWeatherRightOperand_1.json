@@ -2,7 +2,7 @@
   {
     "REMARK_1": "NLP :: weather.temperature has to be 20 Celsius < temperature < 32 Celsius",
     "REMARK_2": "OR",
-    "REMARK_3": "NLP :: 120 min in duration of 3 hours AND weather.rainfall < 4 mm"
+    "REMARK_3": "NLP :: sun shines 120 min in duration of 3 h AND weather.rainfall < 4 mm"
   },
   {
     "odrl:or": {
