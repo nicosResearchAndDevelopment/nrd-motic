@@ -78,6 +78,9 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 ```
 
 #### fno
+
+[The Function Ontology](https://fno.io/spec/)
+
 ```turtle
 gbx:timeBeforeExecution
     a                    fno:Execution ;

@@ -1,6 +1,6 @@
 {
   "@id": "{{root}}/policy/rule/constraint/operator/weather_is_nice_1.json",
-  "leftOperand": "weather",
+  "leftOperand": "weather:current",
   "operator": "weather:is",
   "rightOperand": {
     "@id": "{{root}}/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json"

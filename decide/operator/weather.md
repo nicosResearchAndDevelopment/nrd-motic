@@ -4,10 +4,9 @@
 
 A very interesting and not seldom used context.
 
-- Prefix: `wet`
+- Prefix: `wea`
 
-### wet:is
-
+### wea:is
 
 ```text
 
@@ -15,7 +14,6 @@ A very interesting and not seldom used context.
 
 |   |   |   | is|
 |---|---|---|:---|
-| "wet:now"   | `is` | "ex:nice"           | true  |
-
+| "wea:now"   | `wea:is` | "example:nice"           | true  |
 
 ---

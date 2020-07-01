@@ -2,15 +2,15 @@
 
 - Prefix: `org`
 
-
 A `org:Organization` grounded on `foaf:Organization`.
 
-- Prefix: `org`
 - [vocab-org](https://www.w3.org/TR/vocab-org/)
-- [term_Organization](http://xmlns.com/foaf/spec/#term_Organization)
+- [foaf spec: term_Organization](http://xmlns.com/foaf/spec/#term_Organization)
 
 
 ### org:hasSubOrganization
+
+#### Example
 
 ```
 (companyA)--.
@@ -35,6 +35,11 @@ A `org:Organization` grounded on `foaf:Organization`.
 | "urn:finance"   | `unitOf` | "urn:companyA" | true |
 | "urn:finance"   | `unitOf` | "urn:companyB" | false |
 
+
+### org:hasSite
+
+#### Example
+
 ```
 
                {nirvana}
@@ -56,8 +61,6 @@ A `org:Organization` grounded on `foaf:Organization`.
                {wonderland}
                
 ```
-
-### org:hasSite
 
 |   |   |   | is|  
 |---|---|---|:---|

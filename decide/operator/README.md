@@ -11,6 +11,8 @@ Please follow, to be informed on editings...
 
 ## [geometry](./geometry.md)
 
+## [geospatial](./geospatial.md)
+
 ## [agent](./agent.md)
 
 Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
@@ -34,10 +36,10 @@ match("GAIAboX@nicos-ag.com", "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\
 ###### ODRL
 ```json
 {
-    //...
     "constraint": [{
+               "@id": "{{root}}/constraints/is_mail", 
                "leftOperand": {
-                    "@type": "xsd:string:address",
+                    "@type": "xsd:string",
                     "@value": "GAIAboX@nicos-ag.com"
                },
                "operator": "regex:match",
@@ -46,7 +48,6 @@ match("GAIAboX@nicos-ag.com", "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\
                     "@value": "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]+$"
                }
            }]
-        //...
 }
 ```
 
