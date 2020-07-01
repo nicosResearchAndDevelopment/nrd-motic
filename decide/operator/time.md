@@ -33,10 +33,10 @@ Disjoint(i, j) === (Before(i, j) || After(i, j))
 
 ### time:Before
 
-##### Example
+###### Example
 A `time:Instant` is `before` a `time:Interval`.
 
-###### Pseudo code
+###### pseudocode
 ```pseudocode
 Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) = true
 ```
@@ -77,7 +77,7 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 }
 ```
 
-#### fno
+##### fno
 
 [The Function Ontology](https://fno.io/spec/)
 
@@ -101,10 +101,10 @@ gbx:timeBeforeExecution
 
 ### time:After
 
-##### Example
+###### Example
 A `time:Instant` is `after` a `time:Interval`.
 
-###### Pseudo code
+###### pseudocode
 ```pseudocode
 After(["2019-04-01T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]) = true
 ```
@@ -130,7 +130,7 @@ After(["2019-04-01T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"]
 
 A `time:Instant` `equal`s a `time:Instant`.
 
-###### Pseudo code
+###### pseudocode
 ```pseudocode
 Equals(["2019-04-01T00:00:00Z"], ["2019-04-01T00:00:00Z"]) = true
 ```

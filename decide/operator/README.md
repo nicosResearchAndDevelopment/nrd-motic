@@ -23,37 +23,8 @@ Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
 
 ## [net](./net.md)
 
-## Regular Expression
+## [regex](./regex.md)
 
-- prefix : regex
-
-### regex:match
-
-Is a given string a valid Email-Address?
-
-```pseudocode
-match("GAIAboX@nicos-ag.com", "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]+$") = true
-```
-
-###### ODRL
-```json
-{
-    "constraint": [{
-               "@id": "{{root}}/constraints/is_mail", 
-               "leftOperand": {
-                    "@type": "xsd:string",
-                    "@value": "GAIAboX@nicos-ag.com"
-               },
-               "operator": "regex:match",
-               "rightOperand":  {
-                    "@type": "xsd:string",
-                    "@value": "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]+$"
-               }
-           }]
-}
-```
-
----
 
 ## Id
 

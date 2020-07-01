@@ -10,9 +10,8 @@ A `org:Organization` grounded on `foaf:Organization`.
 
 ### org:hasSubOrganization
 
-#### Example
-
-```
+##### Example
+```text
 (companyA)--.
             |
             .--(companyB)
@@ -38,9 +37,8 @@ A `org:Organization` grounded on `foaf:Organization`.
 
 ### org:hasSite
 
-#### Example
-
-```
+##### Example
+```text
 
                {nirvana}
              /

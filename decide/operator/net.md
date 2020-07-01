@@ -28,6 +28,7 @@ Network Reference System.
 
 Is a given string a valid IPv$-Address?
 
+###### pseudocode
 ```pseudocode
 isA(["178.10.10.42"], "ipv4") = true
 ```
@@ -57,6 +58,7 @@ isA(["178.10.10.42"], "ipv4") = true
 
 ### net:inside
 
+###### pseudocode
 ```pseudocode
 inside(["178.10.10.42"], ["178.10.10.1", "178.10.10.255"]) = true
 ```
@@ -67,6 +69,7 @@ inside(["178.10.10.42"], ["178.10.10.1", "178.10.10.255"]) = true
 
 ### net:contains
 
+###### pseudocode
 ```pseudocode
 contains(["178.10.10.1", "178.10.10.256"], ["178.10.10.42"]) = true
 contains(["178.10.10.1", "178.10.10.256"], ["178.10.42.42"]) = false

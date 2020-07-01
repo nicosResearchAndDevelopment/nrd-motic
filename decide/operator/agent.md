@@ -19,7 +19,8 @@ The group `exA:users` contains all users of example-company "A".
 The group `exA:admin` (belonging to example-company "A") has three
  members, so has group `exA:maintainer` three others:
 
-```
+##### Example
+```text
 (exA:users)--. 
               |--(exA:zaphod)
               |--(exA:ford)
