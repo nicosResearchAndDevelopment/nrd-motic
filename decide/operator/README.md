@@ -19,7 +19,11 @@ Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
 
 ## [organization](./organization.md)
 
-## [weather](./weather.md)
+## [environment](./environment.md)
+
+#### [weather](./weather.md)
+
+This is a more crisp usage of `environment`
 
 ## [net](./net.md)
 

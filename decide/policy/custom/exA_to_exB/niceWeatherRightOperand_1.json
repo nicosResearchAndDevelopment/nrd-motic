@@ -2,30 +2,34 @@
   "@context": [
     "http://www.w3.org/ns/odrl.jsonld",
     {
+      "odrl": "http://www.w3.org/ns/odrl.jsonld",
       "weather": "http://www.nicos-rd.com/weather/"
     }
-
   ],
   "uid": "{{root}}/decide/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json",
   "constraint": [
     {
-      "REMARK_1": "NLP :: weather.temperature has to be 20 Celsius < temperature < 32 Celsius",
+      "REMARK_1": "NLP :: weather.temperature has to be 20.42 Celsius < temperature < 32 Celsius",
       "REMARK_2": "OR",
-      "REMARK_3": "NLP :: sun shines 120 min in duration of 3 h AND weather.rainfall < 4 mm"
+      "REMARK_3": "NLP :: weather:atmosphericpressure (atmospheric pressure) > 1042.42 AND weather.rainfall < 4 mm"
     },
     {
       "odrl:or": {
+        "@type": "odrl:LogicalConstraint",
         "@list": [
           {
             "odrl:and": {
+              "@type": "odrl:LogicalConstraint",
               "@list": [
                 {
+                  "@type": "odrl:Constraint",
                   "leftOperand": "weather:temperature",
                   "operator": "odrl:gt",
-                  "rightOperand": 20,
+                  "rightOperand": 20.42,
                   "unit": "weather:celsius"
                 },
                 {
+                  "@type": "odrl:Constraint",
                   "leftOperand": "weather:temperature",
                   "operator": "odrl:lt",
                   "rightOperand": 32,
@@ -36,19 +40,22 @@
           },
           {
             "odrl:and": {
+              "@type": "odrl:LogicalConstraint",
               "@list": [
                 {
-                  "leftOperand": "weather:sunMinutesInThreeHours",
+                  "@type": "odrl:Constraint",
+                  "leftOperand": "weather:atmosphericpressure",
                   "operator": "odrl:gt",
-                  "rightOperand": 120,
-                  "unit": "weather:minute"
+                  "rightOperand": 1042.42,
+                  "unit": "weather:hpa"
                 },
                 {
+                  "@type": "odrl:Constraint",
                   "leftOperand": "weather:rainfall",
                   "operator": "odrl:lt",
                   "rightOperand": 4,
                   "REM": "unit :: OR si:m^-3",
-                  "unit": "weather:millimeter"
+                  "unit": "weather:mm"
                 }
               ]
             }
