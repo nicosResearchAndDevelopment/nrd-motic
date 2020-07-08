@@ -8,11 +8,9 @@
   ],
   "uid": "{{root}}/decide/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json",
   "constraint": [
-    {
-      "REMARK_1": "NLP :: weather.temperature has to be 20.42 Celsius < temperature < 32 Celsius",
-      "REMARK_2": "OR",
-      "REMARK_3": "NLP :: weather:atmosphericpressure (atmospheric pressure) > 1042.42 AND weather.rainfall < 4 mm"
-    },
+    "REMARK_1 : NLP :: weather.temperature has to be 20.42 Celsius < temperature < 32 Celsius",
+    "REMARK_2 : OR",
+    "REMARK_3 : NLP :: weather:atmosphericpressure (atmospheric pressure) > 1042.42 AND weather.rainfall < 4 mm",
     {
       "odrl:or": {
         "@type": "odrl:LogicalConstraint",

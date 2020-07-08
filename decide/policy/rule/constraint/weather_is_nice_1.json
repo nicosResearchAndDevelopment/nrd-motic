@@ -6,7 +6,7 @@
       "weather": "http://www.nicos-rd.com/weather/"
     }
   ],
-  "uid": "{{root}}/decide/policy/rule/constraint/operator/weather_is_nice_1.json",
+  "uid": "{{root}}/decide/policy/rule/constraint/weather_is_nice_1.json",
   "@type": "odrl:Constraint",
   "leftOperand": "weather:current",
   "operator": "weather:is",
