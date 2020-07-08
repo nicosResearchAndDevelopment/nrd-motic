@@ -4,7 +4,6 @@ REMARK: this document is NOT normative and at this point a draft only.
 
 Please follow, to be informed on editings...
 
-
 ## [ODRL](./odrl.md)
 
 ## [time](./time.md)

@@ -7,7 +7,7 @@ time
 
 
 
-```
+```text
                       |      i    |        j
   Before(i, j)        |<.........>|   <--------->    After(j, i)
    Meets(i, j)        |           |<------------>    MetBy(j, i)
@@ -26,7 +26,7 @@ Finishes(i, j)    <---|---------->|                  FinishedBy(j, i)
 
 Two additional relations, `In` and `Disjoint`:
 
-```
+```pseudocode
       In(i, j) === (Starts(i, j) || During(i, j) || Finishes(i, j))
 Disjoint(i, j) === (Before(i, j) || After(i, j))
 ```
@@ -44,13 +44,20 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 ###### ODRL
 ```json
 {
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+      {
+        "odrl": "http://www.w3.org/ns/odrl.jsonld",
+        "time": "http://www.w3.org/2006/time#"
+      }
+    ],
     "constraint": [{
                "leftOperand": {
                     "@type": "time:Instant",
-                    "hasBeginning": {
+                    "time:hasBeginning": {
                         "@type": "time:Instant",
-                        "inXSDDateTime": {
-                            "@type": "xsd:dateTime",
+                        "time:inXSDDateTimeStamp": {
+                            "@type": "xsd:dateTimeStamp",
                             "@value": "2019-01-05T00:00:00Z"
                         }
                     }
@@ -58,17 +65,17 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
                "operator": "time:Before",
                "rightOperand":  {
                     "@type": "time:Interval",
-                    "hasBeginning": {
+                    "time:hasBeginning": {
                         "@type": "time:Instant",
-                        "inXSDDateTime": {
-                            "@type": "xsd:dateTime",
+                        "time:inXSDDateTimeStamp": {
+                            "@type": "xsd:dateTimeStamp",
                             "@value": "2019-02-01T00:00:00Z"
                         }
                     },
-                    "hasEnd": {
+                    "time:hasEnd": {
                         "@type": "time:Instant",
-                        "inXSDDateTime": {
-                            "@type": "xsd:dateTime",
+                        "time:inXSDDateTimeStamp": {
+                            "@type": "xsd:dateTimeStamp",
                             "@value": "2019-03-01T00:00:00Z"
                         }
                     }
@@ -82,15 +89,24 @@ Before(["2019-01-05T00:00:00Z"], ["2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 [The Function Ontology](https://fno.io/spec/)
 
 ```turtle
+@prefix fno: <https://fno.io/spec/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix gbx: <https://www.nicos-rd.com/GAIAboX/> .
+
 gbx:timeBeforeExecution
     a                    fno:Execution ;
-	# TODO: is rhis the right way to express the parameters?
-	# time, i
+    # TODO: is rhis the right way to express the parameters?
+    #
+    # time, i
     gbx:timeLeftOperand  [ fno:type          time:TemporalEntity ;
                            time:hasBeginning "2020-06-24T15:35:19.42Z" ;
                            time:hasEnd       "2020-06-24T15:35:19.42Z" ; ] ;
-    fno:executes         gbx:timeBeforeFunction ;
-	#time, j
+
+    #
+    fno:executes gbx:timeBeforeFunction ;
+    #
+
+    # time, j
     gbx:timeRightOperand [ fno:type          time:TemporalEntity ;
                            time:hasBeginning "2020-06-24T15:35:19.43Z" ;
                            time:hasEnd       "2020-06-24T15:35:19.43Z" ; ] ;
