@@ -18,11 +18,15 @@ Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
 
 ## [organization](./organization.md)
 
-## [environment](./environment.md)
+## Complex Context
+
+### [environment](./environment.md)
 
 #### [weather](./weather.md)
 
 This is a more crisp usage of `environment`
+
+### [event](./event.md)
 
 ## [net](./net.md)
 
