@@ -1,4 +1,4 @@
-# `evenht` Binary Operators
+# `event` Binary Operators
 
 ## Event
 
