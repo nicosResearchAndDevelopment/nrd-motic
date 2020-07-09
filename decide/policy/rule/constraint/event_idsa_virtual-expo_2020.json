@@ -6,12 +6,12 @@
       "event": "http://www.nicos-rd.com/event/"
     }
   ],
-  "uid": "{{root}}/decide/policy/rule/constraint/event_idsa_plugfest_2020_q2_happens.json",
+  "uid": "{{root}}/decide/policy/rule/constraint/event_idsa_virtual-expo_2020.json",
   "@type": "odrl:Constraint",
   "leftOperand": "event",
   "operator": "event:happening",
   "rightOperand": {
-    "uid": "{{root}}/decide/policy/custom/idsa/event/rightoperand/plugfest_2022_q2.json"
+    "uid": "{{root}}/decide/policy/custom/idsa/event/rightoperand/event_idsa_virtual-expo_2020.json"
   },
   "unit": "event:"
 }

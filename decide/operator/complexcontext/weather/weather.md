@@ -7,7 +7,7 @@ A very interesting and not seldom used context.
 - Prefix: `weather`
 
 
-### weather `status`
+### weather `probe`
 
 ```json
 {
@@ -18,7 +18,7 @@ A very interesting and not seldom used context.
             "xsd":     "http://www.w3.org/2001/XMLSchema#"
         }
     ],
-    "@type":                       "weather:status",
+    "@type":                       "weather:probe",
     "weather:timestamp":         {
         "@type":  "xsd:dateTimestamp",
         "@value": "2020-07-07T16:27:42.42+02:00"
@@ -41,13 +41,15 @@ A very interesting and not seldom used context.
 
 ### weather:is
 
+>>> TODO: OR (following [environment](../environment/environment.md) / [event](../event/event.md)) `weather:inside`?
+
 ```text
 
 ```
 
-|   |   |   | is|
+|   |   |   | is |
 |---|---|---|:---|
-| "weather:current"   | `weather:is` | "example:nice"           | true  |
+| "weather:probe"   | `weather:is` | "example:nice"           | true  |
 
 
 ### Example

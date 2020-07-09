@@ -6,32 +6,51 @@ Please follow, to be informed on editings...
 
 ## [ODRL](./odrl.md)
 
+---
+
 ## [time](./time.md)
+
+---
 
 ## [geometry](./geometry.md)
 
+---
+
 ## [geospatial](./geospatial.md)
+
+---
 
 ## [agent](./agent.md)
 
 Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
 
+---
+
 ## [organization](./organization.md)
 
-## Complex Context
+---
 
-### [environment](./environment.md)
+## [Complex Context](./complexcontext)
 
-#### [weather](./weather.md)
+Handling some more complicated and advanced contexts.
+
+### [environment](./complexcontext/environment/environment.md)
+
+#### [weather](./complexcontext/weather/weather.md)
 
 This is a more crisp usage of `environment`
 
-### [event](./event.md)
+### [event](./complexcontext/event/event.md)
+
+---
 
 ## [net](./net.md)
 
+---
+
 ## [regex](./regex.md)
 
+---
 
 ## Id
 

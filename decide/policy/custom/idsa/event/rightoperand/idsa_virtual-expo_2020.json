@@ -1,0 +1,36 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "odrl": "http://www.w3.org/ns/odrl.jsonld",
+      "time": "http://www.w3.org/2006/time#",
+      "event": "http://www.nicos-rd.com/event/"
+    }
+  ],
+  "uid": "{{root}}/decide/policy/custom/idsa/event/rightoperand/event_idsa_virtual-expo_2020.json",
+  "constraint": [
+    {
+      "@type": "odrl:Constraint",
+      "leftOperand": "status",
+      "operator": "time:In",
+      "rightOperand": {
+        "@type": "time:Interval",
+        "time:hasBeginning": {
+          "@type": "time:Instant",
+          "time:inXSDDateTimeStamp": {
+            "@type": "xsd:dateTimeStamp",
+            "@value": "2020-04-27T10:00:00+2:00"
+          }
+        },
+        "time:hasEnd": {
+          "@type": "time:Instant",
+          "time:inXSDDateTimeStamp": {
+            "@type": "xsd:dateTimeStamp",
+            "@value": "2020-05-14T17:00:00+2:00"
+          }
+        }
+      }
+    }
+  ]
+}
+
