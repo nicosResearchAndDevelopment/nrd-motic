@@ -6,12 +6,12 @@
       "weather": "http://www.nicos-rd.com/weather/"
     }
   ],
-  "uid": "{{root}}/decide/policy/rule/constraint/weather_is_nice_1.json",
+  "uid": "{{root}}/examples/weather_is_nice_1.json",
   "@type": "odrl:Constraint",
-  "leftOperand": "weather:current",
+  "leftOperand": "weather:probe",
   "operator": "weather:is",
   "rightOperand": {
-    "uid": "{{root}}/decide/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json"
+    "uid": "{{root}}/examples/exA_to_exB/niceWeatherRightOperand_1.json"
   },
   "unit": "weather:"
 }

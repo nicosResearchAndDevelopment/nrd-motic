@@ -6,7 +6,7 @@
       "weather": "http://www.nicos-rd.com/weather/"
     }
   ],
-  "uid": "{{root}}/decide/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json",
+  "uid": "{{root}}/examples/exA_to_exB/niceWeatherRightOperand_1.json",
   "@type": "weather:Definition",
   "constraint": [
     "REMARK_1 : NLP :: weather.temperature has to be 20.42 Celsius < temperature < 32 Celsius",

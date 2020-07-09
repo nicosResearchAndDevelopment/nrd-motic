@@ -29,7 +29,7 @@ The `event:probe` of given environment is the subject and will be represented
 }
 ```
 
-### Operator `event:inside`
+### operator `event:inside`
 
 ```text
 
@@ -42,7 +42,7 @@ The `event:probe` of given environment is the subject and will be represented
 
 ### Example
 
-#### exhibition
+#### Exhibition
 
 The use case:
 > Provide permission to a data consumer to use the data
@@ -52,9 +52,15 @@ Duration:
 ```text
 27.04.2020 - 14.05.2020
 ```
+
+##### Enforcemnt and Right Operand
+
+- [enforced event:probe](./examples/event_idsa_virtual-expo_2020.json)
+- [rightOperand "exhibition"](./examples/idsa_virtual_expo_2020_rightOperand.json)
+
 ---
 
-#### accident
+#### Accident
 
 The use case:
 > If an accident occurred, provide permission to read the
@@ -77,7 +83,7 @@ or
 probe.airbagIsOpened equals true
 ```
 ---
-#### barbershop
+#### Barbershop
 
 The use case:
 > Provide customer permission to shop if it's opened.
@@ -145,6 +151,7 @@ Probe:
 |   |   |   | is |
 |---|---|---|:---|
 | "event:probe"   | `event:inside` | "shop:open"           | false  |
+
 
 
 ---

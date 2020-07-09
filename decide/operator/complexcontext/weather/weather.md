@@ -39,7 +39,7 @@ A very interesting and not seldom used context.
 }
 ```
 
-### weather:is
+### operator `weather:is`
 
 >>> TODO: OR (following [environment](../environment/environment.md) / [event](../event/event.md)) `weather:inside`?
 
@@ -52,12 +52,16 @@ A very interesting and not seldom used context.
 | "weather:probe"   | `weather:is` | "example:nice"           | true  |
 
 
-### Example
+### Examples
+
+#### Two Organizations and Nice Weather
 
 Two organizations (`exA` and `exB` had defined what "weather is nice" means (`niceWeatherRightOperand_1.json`)) and
  handle it in a working constraint `weather_is_nice_1.json` by putting in *current weather*... 
 
-- seeAlso: [exA_to_exB/niceWeatherRightOperand_1](https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/policy/custom/exA_to_exB/niceWeatherRightOperand_1.json)
-- seeAlso: [weather_is_nice_1](https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/policy/rule/constraint/weather_is_nice_1.json)
+##### Enforcemnt and Right Operand
+
+- [enforce weather:probe](./examples/weather_is_nice_1.json)
+- [rightOperand "nice" = 'exA_to_exB/niceWeatherRightOperand_1'](./examples/exA_to_exB/niceWeatherRightOperand_1.json)
 
 ---
