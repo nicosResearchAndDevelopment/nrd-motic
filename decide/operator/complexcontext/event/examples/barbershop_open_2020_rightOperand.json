@@ -7,11 +7,11 @@
       "event": "http://www.nicos-rd.com/event/"
     }
   ],
-  "uid": "{{root}}/examples/event_idsa_virtual-expo_2020.json",
+  "uid": "{{root}}/examples/barbershop_open_2020_rightOperand.json",
   "constraint": [
     {
       "@type": "odrl:Constraint",
-      "leftOperand": "event:probe",
+      "leftOperand": "status",
       "operator": "time:In",
       "rightOperand": {
         "@type": "time:Interval",

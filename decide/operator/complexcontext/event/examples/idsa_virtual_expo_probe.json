@@ -1,0 +1,17 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "odrl": "http://www.w3.org/ns/odrl.jsonld",
+      "event": "http://www.nicos-rd.com/event/"
+    }
+  ],
+  "uid": "{{root}}/examples/idsa_virtual_expo_probe.json",
+  "@type": "odrl:Constraint",
+  "leftOperand": "event:probe",
+  "operator": "event:inside",
+  "rightOperand": {
+    "uid": "{{root}}/examples/idsa_virtual_expo_2020_rightOperand.json"
+  },
+  "unit": "event:"
+}

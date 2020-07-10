@@ -6,12 +6,12 @@
       "event": "http://www.nicos-rd.com/event/"
     }
   ],
-  "uid": "{{root}}/examples/event_idsa_virtual-expo_2020.json",
+  "uid": "{{root}}/examples/barbershop_probe.json",
   "@type": "odrl:Constraint",
   "leftOperand": "event:probe",
   "operator": "event:inside",
   "rightOperand": {
-    "uid": "{{root}}/examples/idsa_virtual_expo_2020_rightOperand.json"
+    "uid": "{{root}}/examples/barbershop_open_2020_rightOperand.json"
   },
   "unit": "event:"
 }
