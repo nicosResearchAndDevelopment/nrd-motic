@@ -6,6 +6,8 @@ A very interesting and not seldom used context.
 
 - Prefix: `event`
 
+- seeAlso: [https://schema.org/Event](https://schema.org/Event)
+- seeAlso: [https://schema.org/eventSchedule](https://schema.org/eventSchedule)
 
 ### `event:probe`
 
