@@ -9,7 +9,8 @@
   ],
   "uid": "{{root}}/examples/barbershop_open_2020_rightOperand.json",
   "@type": "event:Definition",
-  "constraint": [{
+  "constraint": [
+    {
       "odrl:and": {
         "@type": "odrl:LogicalConstraint",
         "@list": [
@@ -17,78 +18,97 @@
             "odrl:or": {
               "@type": "odrl:LogicalConstraint",
               "@list": [
-				  {
-					  "odrl:and": {
-						  "@type": "odrl:LogicalConstraint",
-						  "@list": [
-							  {
-								  	"@type": "odrl:Constraint",
-								  	"leftOperand": "dayOfWeek",
-                  					"operator": "odrl:eq",
-                  					"rightOperand": "time:Monday",
-                  					"unit": "time:DayOfWeek"
-							  },
-							  {
-								  "odrl:or": {
-						  			"@type": "odrl:LogicalConstraint",
-						  			"@list": [
-										{
-											"odrl:and": {
-												"uid": "{{root}}/examples/barbershop_open_2020_rightOperand_09_to_12",
-									  			"@type": "odrl:LogicalConstraint",
-									  			"@list": [
-													{
-											  			"@type": "odrl:Constraint",
-											  			"leftOperand": "time",
-			                  							"operator": "odrl:gteq",
-			                  							"rightOperand": "09:00",
-			                  							"unit": "xsd:time"
-													},
-													{
-											  			"@type": "odrl:Constraint",
-											  			"leftOperand": "time",
-			                  							"operator": "odrl:lteq",
-			                  							"rightOperand": "12:00",
-			                  							"unit": "xsd:time"
-													}
-												]
-											}
-										},
-										{
-											"odrl:and": {
-												"uid": "{{root}}/examples/barbershop_open_2020_rightOperand_13_to_18",
-									  			"@type": "odrl:LogicalConstraint",
-									  			"@list": [
-													{
-											  			"@type": "odrl:Constraint",
-											  			"leftOperand": "time",
-			                  							"operator": "odrl:gteq",
-			                  							"rightOperand": "13:00",
-			                  							"unit": "xsd:time"
-													},
-													{
-											  			"@type": "odrl:Constraint",
-											  			"leftOperand": "time",
-			                  							"operator": "odrl:lteq",
-			                  							"rightOperand": "18:00",
-			                  							"unit": "xsd:time"
-													}
-												]
-											}
-										}
-									]
-								}
-							  }
-						  ]
-					  }
-				  }
-				  
-				  
+                {
+                  "odrl:and": {
+                    "@type": "odrl:LogicalConstraint",
+                    "@list": [
+                      {
+                        "@type": "odrl:Constraint",
+                        "leftOperand": "dayOfWeek",
+                        "operator": "odrl:eq",
+                        "rightOperand": "time:Monday",
+                        "unit": "time:DayOfWeek"
+                      },
+                      {
+                        "odrl:or": {
+                          "@type": "odrl:LogicalConstraint",
+                          "@list": [
+                            {
+                              "odrl:and": {
+                                "uid": "{{root}}/examples/barbershop_open_2020_rightOperand_09_to_12",
+                                "@type": "odrl:LogicalConstraint",
+                                "@list": [
+                                  {
+                                    "@type": "odrl:Constraint",
+                                    "leftOperand": "time",
+                                    "operator": "odrl:gteq",
+                                    "rightOperand": "09:00",
+                                    "unit": "xsd:time"
+                                  },
+                                  {
+                                    "@type": "odrl:Constraint",
+                                    "leftOperand": "time",
+                                    "operator": "odrl:lteq",
+                                    "rightOperand": "12:00",
+                                    "unit": "xsd:time"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "odrl:and": {
+                                "uid": "{{root}}/examples/barbershop_open_2020_rightOperand_13_to_18",
+                                "@type": "odrl:LogicalConstraint",
+                                "@list": [
+                                  {
+                                    "@type": "odrl:Constraint",
+                                    "leftOperand": "time",
+                                    "operator": "odrl:gteq",
+                                    "rightOperand": "13:00",
+                                    "unit": "xsd:time"
+                                  },
+                                  {
+                                    "@type": "odrl:Constraint",
+                                    "leftOperand": "time",
+                                    "operator": "odrl:lteq",
+                                    "rightOperand": "18:00",
+                                    "unit": "xsd:time"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "odrl:and": {
+              "@type": "odrl:LogicalConstraint",
+              "seeAlso": "https://www.w3.org/TR/xmlschema-2/#gMonthDay",
+              "@list": [
+                {
+                  "@type": "odrl:Constraint",
+                  "leftOperand": "date",
+                  "operator": "time:Disjoint",
+                  "seeAlso": "https://www.w3.org/TR/owl-time/#time:intervalDisjoint",
+                  "rightOperand": "--12-24",
+                  "unit": "xsd:gMonthDay"
+                },
+                {
+                  "@type": "odrl:Constraint",
+                  "leftOperand": "date",
+                  "operator": "time:Disjoint",
+                  "rightOperand": "--01-01",
+                  "unit": "xsd:gMonthDay"
+                }
               ]
             }
           }
-		  
-          
         ]
       }
     }
