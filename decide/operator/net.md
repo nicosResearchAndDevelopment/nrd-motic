@@ -43,16 +43,17 @@ isA(["178.10.10.42"], "ipv4") = true
 ```json
 {
     "constraint": [{
-               "leftOperand": {
-                    "@type": "net:address",
-                    "@value": ["178.10.10.42"]
-               },
-               "operator": "net:is",
-               "rightOperand":  {
-                    "@type": "net:type",
-                    "@value": "ipv4"
-               }
-           }]
+            "@type": "odrl:Constraint",
+            "leftOperand": {
+                "@type": "net:address",
+                "@value": ["178.10.10.42"]
+            },
+            "operator": "net:is",
+            "rightOperand":  {
+                "@type": "net:type",
+                "@value": "ipv4"
+            }
+   }]
 }
 ```
 
