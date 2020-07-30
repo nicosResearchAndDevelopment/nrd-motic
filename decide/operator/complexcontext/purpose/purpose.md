@@ -1,5 +1,11 @@
 # `purpose` Binary Operators
 
+# -#######################################
+# UNDER CONSTRUCTION
+# MAYBE NOT SOLVABLE
+# -#######################################
+
+
 ## Purpose
 
 A very interesting and not seldom used context.

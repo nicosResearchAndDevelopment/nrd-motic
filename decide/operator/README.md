@@ -40,7 +40,15 @@ Handling some more complicated and advanced contexts.
 
 This is a more crisp usage of `environment`
 
-### [event](./complexcontext/event/event.md)
+#### [event](./complexcontext/event/event.md)
+
+Here you will find some interesting use cases around context `time`.
+ Something begins, has an ending and maybe has some discontinuities...
+
+#### [purpose](./complexcontext/purpose/purpose.md)
+
+The badest kind of a "binary operator", not solved, so far...
+
 
 ---
 
