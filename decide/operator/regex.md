@@ -24,17 +24,18 @@ match("GAIAboX@nicos-ag.com", "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\
 ```json
 {
     "constraint": [{
-               "@id": "{{root}}/constraints/is_mail", 
-               "leftOperand": {
-                    "@type": "xsd:string",
-                    "@value": "GAIAboX@nicos-ag.com"
-               },
-               "operator": "regex:match",
-               "rightOperand":  {
-                    "@type": "xsd:string",
-                    "@value": "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]+$"
-               }
-           }]
+        "uid":          "{{root}}/constraints/is_mail",
+        "@type":        "odrl:Constraint",
+        "leftOperand":  {
+            "@type":  "xsd:string",
+            "@value": "GAIAboX@nicos-ag.com"
+        },
+        "operator":     "regex:match",
+        "rightOperand": {
+            "@type":  "xsd:string",
+            "@value": "^[A-Za-z0-9.!#$%&'*+\\-/=?^_`{|}~]+@[A-Za-z0-9.\\-]+\\.[A-Za-z]+$"
+        }
+    }]
 }
 ```
 
