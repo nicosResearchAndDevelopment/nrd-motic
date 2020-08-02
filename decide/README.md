@@ -59,6 +59,6 @@ Use case [motic.decide "*IDS usage control*"](./ids/ids-usage-control/README.md)
 
 ---
 
-### Data Flow Control
+### Dataflow Control
 
 ---
