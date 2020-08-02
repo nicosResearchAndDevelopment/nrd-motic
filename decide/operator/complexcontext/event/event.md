@@ -133,13 +133,13 @@ Remarks:
 ...but not at
 
 ```text
-24.12.2020
-01.01.2021
+24.12.
+01.01.
 ```
-| [xsd:date](https://www.w3.org/TR/xmlschema-2/#date)  |||
+| [xsd:gMonthDay](https://www.w3.org/TR/xmlschema-2/#gMonthDay)  |||
 |---|---|---|
-| 24.12.2020 | christmas  |
-| 01.01.2021 | new year    |
+| "--12-24" | christmas  |
+| "--01-01" | new year    |
 |||
 
 So, handling a probe out this scope means, to handle

@@ -97,7 +97,8 @@
                   "operator": "time:Disjoint",
                   "seeAlso": "https://www.w3.org/TR/owl-time/#time:intervalDisjoint",
                   "rightOperand": "--12-24",
-                  "unit": "xsd:gMonthDay"
+                  "unit": "xsd:gMonthDay",
+                  "seeAlso": "https://www.w3.org/TR/xmlschema-2/#gMonthDay",
                 },
                 {
                   "@type": "odrl:Constraint",
