@@ -40,13 +40,23 @@
 
 ---
 
+## Policy Repository
+
+---
+
+## Policy Enforcement
+
+---
 
 ## Operands
 
 ---
 
+## Use cases
 
-## Use case
+### Dataflow Control
+
+---
 
 ### Access Control
 
@@ -59,6 +69,3 @@ Use case [motic.decide "*IDS usage control*"](./ids/ids-usage-control/README.md)
 
 ---
 
-### Dataflow Control
-
----
