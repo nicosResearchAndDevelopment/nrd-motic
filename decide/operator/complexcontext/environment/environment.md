@@ -19,6 +19,6 @@ A very interesting and not seldom used context.
 
 For practical reasons, have a look of a more special use case: [weather](../weather/weather.md).
 
-And: also have a look at [event](../event/event.md)
+And: also have a look at [event](../event/event.md).
 
 ---

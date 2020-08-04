@@ -50,16 +50,17 @@ The use case:
 > Provide permission to a data consumer to use the data
 > during the exhibition.
 
-Duration:
+Time period:
 
 ```text
-27.04.2020 - 14.05.2020
+27.04.2020, 10:00 - 14.05.2020, 17:00
 ```
 
 ##### Enforcement and Right Operand
 
-- [enforced 'event:probe'](./examples/idsa_virtual_expo_probe.json)
-- [rightOperand 'exhibition'](./examples/idsa_virtual_expo_2020_rightOperand.json)
+[enforced 'event:probe'](./examples/idsa_virtual_expo_probe.json)
+
+[rightOperand 'exhibition'](./examples/idsa_virtual_expo_2020_rightOperand.json)
 
 ---
 
@@ -136,7 +137,7 @@ Remarks:
 24.12.
 01.01.
 ```
-| [xsd:gMonthDay](https://www.w3.org/TR/xmlschema-2/#gMonthDay)  |||
+| [xsd:gMonthDay]($)  |||
 |---|---|---|
 | "--12-24" | christmas  |
 | "--01-01" | new year    |
