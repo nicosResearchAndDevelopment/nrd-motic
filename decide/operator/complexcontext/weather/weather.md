@@ -7,7 +7,7 @@ A very interesting and not seldom used context.
 - Prefix: `weather`
 
 
-### weather `probe`
+### weather `probe1`
 
 ```json
 {
@@ -18,7 +18,8 @@ A very interesting and not seldom used context.
             "xsd":     "http://www.w3.org/2001/XMLSchema#"
         }
     ],
-    "@type":                       "weather:probe",
+    "@id": "http://www.nicos-rd.com/weather#probe1",
+    "@type":                       "smf:probe",
     "weather:timestamp":         {
         "@type":  "xsd:dateTimestamp",
         "@value": "2020-07-07T16:27:42.42+02:00"
@@ -59,9 +60,9 @@ A very interesting and not seldom used context.
 Two organizations (`exA` and `exB` had defined what "weather is nice" means (`niceWeatherRightOperand_1.json`)) and
  handle it in a working constraint `weather_is_nice_1.json` by putting in *current weather*... 
 
-##### Enforcemnt and Right Operand
+##### Enforcement and Right Operand
 
-- [enforce weather:probe](./examples/weather_is_nice_1.json)
+- [enforce weather:probe1](./examples/weather_is_nice_1.json)
 - [rightOperand "nice" = 'exA_to_exB/niceWeatherRightOperand_1'](./examples/exA_to_exB/niceWeatherRightOperand_1.json)
 
 ---
