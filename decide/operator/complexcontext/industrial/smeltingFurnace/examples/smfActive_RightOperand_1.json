@@ -1,0 +1,17 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "odrl": "http://www.w3.org/ns/odrl.jsonld",
+      "smf": "http://www.nicos-rd.com/smeltingfurnace#"
+    }
+  ],
+  "uid": "{{root}}/examples/smfActive_RightOperand_1.json",
+  "@type": "odrl:Constraint",
+  "leftOperand": "smf:probe1",
+  "operator": "smf:mode",
+  "rightOperand": {
+    "uid": "http://www.nicos-rd.com/smeltingfurnace#active"
+  },
+  "unit": "smf:"
+}

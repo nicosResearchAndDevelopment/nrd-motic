@@ -1,0 +1,36 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    {
+      "odrl": "http://www.w3.org/ns/odrl.jsonld",
+      "smf": "http://www.nicos-rd.com/smeltingfurnace#"
+    }
+  ],
+  "uid": "http://www.nicos-rd.com/smeltingfurnace#active",
+  "REMARK_1": "@type :: subClass of odrl:Rule ",
+  "@type": "smf:Definition",
+  "constraint": [
+    "REMARK_1 : NLP :: ",
+    {
+      "odrl:or": {
+        "@type": "odrl:LogicalConstraint",
+        "@list": [
+          {
+            "@type": "odrl:Constraint",
+            "leftOperand": "smf:temperature",
+            "operator": "odrl:gt",
+            "rightOperand": 1200.42,
+            "unit": "smf:celsius"
+          },
+          {
+            "@type": "odrl:Constraint",
+            "leftOperand": "smf:burnerFireOn",
+            "operator": "odrl:eq",
+            "rightOperand": true
+          }
+        ]
+      }
+    }
+  ]
+}
+
