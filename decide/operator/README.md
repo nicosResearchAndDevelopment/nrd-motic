@@ -38,6 +38,8 @@ Handling some more complicated and advanced contexts.
 
 #### [weather](./complexcontext/weather/weather.md)
 
+#### [smelting furnace](./complexcontext/industrial/smeltingFurnace/)
+
 This is a more crisp usage of `environment`
 
 #### [event](./complexcontext/event/event.md)
