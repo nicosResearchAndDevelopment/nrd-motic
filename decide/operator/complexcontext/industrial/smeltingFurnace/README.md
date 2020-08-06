@@ -40,13 +40,13 @@ We want to detect, if furnace is up and running:
 
 |   |   |   | is |
 |---|---|---|:---|
-| "smf:probe1"   | `smf:mode` | "smf:active"           | true  |
+| "smf:probe1"   | `smf:mode` | ["smf:active"](./examples/smfActive_RightOperand_1.json)           | true  |
 
 ### Examples
 
 ##### Enforcement and Right Operand
 
-- [event](./examples/smfActive_RightOperand_1.json)
-- [active](./examples/active_1.json)
+- [constraint](./examples/active_1.json)
+- [active](./examples/smfActive_RightOperand_1.json)
 
 ---
