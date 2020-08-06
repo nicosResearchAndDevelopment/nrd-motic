@@ -26,7 +26,7 @@ The `event:probe` of given environment is the subject and will be represented
     "@type":                       "event:probe",
     "dateTimeStamp": {
       "@type": "xsd:dateTimeStamp",
-      "@value": "2020-07-07T16-42-00"
+      "@value": "2020-07-07T16-42-00Z"
     }
 }
 ```
@@ -76,18 +76,24 @@ The use case:
 > Provide permission to read the geographic location if status
 > of accident is detected.
 
->>> TODO: what s ment: the damaged status (of the car) OR the accident itself as an event?
+>>> TODO: what is ment: the damaged status (of the car) OR the accident itself as an event?
 
 Assuming, we can detect it by observing cars airbag, status is present:
-```text
-probe.airbagOpenedAt time:Before now
-```
+
+|   |   |   | is |
+|---|---|---|:---|
+| "vehicle.airbagOpenedAt"   | `time:Before` | "now"           | true  |
 
 or
 
 ```text
 probe.airbagIsOpened equals true
 ```
+|   |   |   | is |
+|---|---|---|:---|
+| "vehicle.airbagIsOpened"   | `odrl.eq` | true | true  |
+
+
 ---
 
 #### Barbershop
@@ -161,7 +167,7 @@ Probe:
     "@type":                       "event:probe",
     "dateTimeStamp": {
       "@type": "xsd:dateTimeStamp",
-      "@value": "2020-07-07T16-42-00"
+      "@value": "2020-07-07T16-42-00Z"
     }
 }
 ``` 
@@ -185,7 +191,7 @@ Probe:
     "@type":                       "event:probe",
     "dateTimeStamp": {
       "@type": "xsd:dateTimeStamp",
-      "@value": "2020-12-24T10-00-00"
+      "@value": "2020-12-24T10-00-00Z"
     }
 }
 ``` 
