@@ -4,10 +4,18 @@
 
 ### [weather](./weather/weather.md)
 
-### [smelting furnace](./industrial/smeltingFurnace/)
-
 This is a more crisp usage of `environment`
 
+### [smelting furnace](./industrial/smeltingFurnace/)
+
+Not so different from `weather` (temperature is also done), but a use case with
+ a little bit more of *industrial* flavor...
+   
 ## [event](./event/event.md)
+
+[Here](./event/event.md) events are handled, like
+ [*exhibition*](./event/event.md#exhibition),
+ [*accident*](./event/event.md#accident) and a very complex
+ use case called [*barbershop*](./event/event.md#barbershop). 
 
 ---

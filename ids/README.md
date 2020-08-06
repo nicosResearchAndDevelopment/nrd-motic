@@ -1,4 +1,4 @@
-# motic.decide IDS
+# motic.IDS
 
 ## Usage Control
 

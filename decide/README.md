@@ -64,7 +64,7 @@
 
 ### Usage Control
 
-Use case [motic.decide "*IDS usage control*"](./ids/ids-usage-control/README.md) regarding specifications done by
+Use case [motic.IDS "*IDS usage control*"](../ids/ids-usage-control/README.md) regarding specifications done by
  [International Data Spaces (**IDS**)](https://https://www.internationaldataspaces.org/).
 
 ---
