@@ -7,7 +7,7 @@
     }
   ],
   "uid": "{{root}}/examples/exA_to_exB/niceWeatherRightOperand_1.json",
-  "@type": "weather:Definition",
+  "@type": "weather:ContextQualityDefinition",
   "constraint": [
     "REMARK_1 : NLP :: weather.temperature has to be 20.42 Celsius < temperature < 32 Celsius",
     "REMARK_2 : OR",
