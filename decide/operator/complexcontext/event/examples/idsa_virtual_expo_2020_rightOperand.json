@@ -8,6 +8,7 @@
     }
   ],
   "uid": "{{root}}/examples/event_idsa_virtual-expo_2020.json",
+  "@type": "event:ContextQualityDefinition",
   "constraint": [
     {
       "@type": "odrl:Constraint",
@@ -19,14 +20,14 @@
           "@type": "time:Instant",
           "time:inXSDDateTimeStamp": {
             "@type": "xsd:dateTimeStamp",
-            "@value": "2020-04-27T10:00:00+2:00"
+            "@value": "2020-04-27T10:00:00Z"
           }
         },
         "time:hasEnd": {
           "@type": "time:Instant",
           "time:inXSDDateTimeStamp": {
             "@type": "xsd:dateTimeStamp",
-            "@value": "2020-05-14T17:00:00+2:00"
+            "@value": "2020-05-14T17:00:00Z"
           }
         }
       }
