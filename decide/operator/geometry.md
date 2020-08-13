@@ -205,7 +205,7 @@ two points
 .---.
 |
 .
-one line
+one line around a corner
 ```
 
 ```json
@@ -227,7 +227,7 @@ one line
 .---*
 |
 .
-two lines
+two lines as a stair
 ```
 
 ```json
@@ -283,7 +283,7 @@ square with hole
 .----.----.
 |    |
 .----.
-two squares
+two squares corner on corner
 ```
 
 ```json
@@ -311,7 +311,7 @@ two squares
 .----.
      |
 *    .
-dot and a line
+point under a corner line
 ```
 
 ```json
