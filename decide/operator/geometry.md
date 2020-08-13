@@ -175,7 +175,7 @@ one point
 ```
 ```json
 {
-    "type": "Point",
+    "@type": "geom:Point",
     "coordinates": [0, 0]
 }
 ```
@@ -191,7 +191,7 @@ two points
 
 ```json
 {
-    "type": "MultiPoint",
+    "@type": "geom:MultiPoint",
     "coordinates": [
         [0, 0],
         [1, 2]
@@ -210,7 +210,7 @@ one line around a corner
 
 ```json
 {
-    "type": "LineString",
+    "@type": "geom:LineString",
     "coordinates": [
         [0, 0],
         [0, 1],
@@ -232,7 +232,7 @@ two lines as a stair
 
 ```json
 {
-    "type": "MultiLineString",
+    "@type": "geom:MultiLineString",
     "coordinates": [[
         [0, 0],
         [0, 1],
@@ -258,7 +258,7 @@ square with hole
 
 ```json
 {
-    "type": "Polygon",
+    "@type": "geom:Polygon",
     "coordinates": [[
         [0, 0],
         [1, 0],
@@ -288,7 +288,7 @@ two squares corner on corner
 
 ```json
 {
-    "type": "MultiPolygon",
+    "@type": "geom:MultiPolygon",
     "coordinates": [[[
         [0, 0],
         [1, 0],
@@ -316,12 +316,12 @@ point under a corner line
 
 ```json
 {
-    "type": "GeometryCollection",
+    "@type": "geom:GeometryCollection",
     "geometries": [{
-        "type": "Point",
+        "@type": "geom:Point",
         "coordinates": [0, 0]
     }, {
-        "type": "LineString",
+        "@type": "geom:LineString",
         "coordinates": [
             [0, 1],
             [1, 1],
