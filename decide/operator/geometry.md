@@ -45,10 +45,10 @@ As the dimension of the set varies, the boundary might not be all the same, e.g.
 
 The dimension of empty sets would be denoted -1, but there is a simpler and more often used boolean notation, which replaces all -1 with __F__ (false), all other numbers with __T__ (true) and all values that are irrelevant for a particular consideration are denoted with __*__ (any). Also the letters are flattened out to one line. With this we would get the following for a, b, c and d:
 
-- DE9IM(a, b) = [ T T T T T T T T T ]
-- DE9IM(a, c) = [ F F T F F T T T T ]
-- DE9IM(b, c) = [ F F T F T T T T T ]
-- DE9IM(b, d) = [ T T T F T T F F T ]
+- DE9IM(a, b) = `[ TTT TTT TTT ]`
+- DE9IM(a, c) = `[ FFT FFT TTT ]`
+- DE9IM(b, c) = `[ FFT FTT TTT ]`
+- DE9IM(b, d) = `[ TTT FTT FFT ]`
 - ...
 
 This provides a way to categorize the relation between two sets, by simply denoting a DE-9IM notation for the requirements of that relation. All following geometric operators will have a notation
@@ -56,67 +56,88 @@ in this form to allow a better understanding of the requirements.
 
 ## Spatial Operators
 
-### geom:equals
+### `geom:equals`
 
-Two sets _A_ and _B_ are equal, if for every point _a_ in _A_ and every
- point _b_ in _B_, also _a_ is in _B_ and _b_ is in _A_.
+- __Prerequisites:__ `[ T*F **F FF* ]`
+- __Describtion:__ Two geometries __A__ and __B__ are _equal_, if:
+    - for every point __a__ in __A__, __a__ is also in __B__
+    - and for every point __b__ in __B__, __b__ is also in __A__.
+- __Properties:__
+    - symmetric
+    - If __A__ _contains_ __B__ and __B__ _contains_ __A__, __A__ must be _equal_ to __B__.
 
-- symmetric
+### `geom:disjoint`
 
-
-### geom:intersects
-
-A set _A_ intersects a set _B_, if there exists a point _p_, such that
- _p_ is in _A_ and also in _B_.
-
-- symmetric
-- opposite of disjoint
-
-
-### geom:disjoint
-
-A set _A_ is disjoint with a set _B_, if there exists no point _p_,
- such that _p_ is in _A_ and also in _B_.
- 
- - symmetric
- - opposite of intersects
+- __Prerequisites:__ `[ FF* FF* *** ]`
+- __Describtion:__ Two geometries __A__ and __B__ are _disjoint_, if:
+    - for every point __a__ in __A__, __a__ is not in __B__.
+- __Properties:__ 
+    - symmetric
+    - opposite of _intersects_
 
 
-### geom:contains
+### `geom:intersects`
 
-A set _A_ contains a set _B_, if for every point _b_ in _B_, also _b_
- is in _A_.
+- __Prerequisites:__ `[ T** *** *** ]` _OR_ `[ *T* *** *** ]` _OR_ `[ *** T** *** ]` _OR_ `[ *** *T* *** ]`
+- __Describtion:__ Two geometries __A__ and __B__ _intersect_, if:
+    - their exists at least one point __a__ in __A__, that is also in __B__.
+- __Properties:__
+    - symmetric
+    - opposite of _disjoint_
 
-- not symmetric
-- if _A_ contains _B_ and _B_ contains _A_, _A_ and _B_ are equal.
+### `geom:touches`, `geom:meets`
 
+- __Prerequisites:__ `[ FT* *** *** ]` _OR_ `[ F** T** *** ]` _OR_ `[ F** *T* *** ]`
+- __Describtion:__ Two geometries __A__ and __B__ are _touching_, if:
+    - for every point __a__ in the interior of __A__, __a__ is not in the interior of __B__
+    - and at least one point __c__ on the boundary of __A__ is on the boundary of __B__.
+- __Properties:__ 
+    - symmetric
 
-### geom:touches
+### `geom:contains`
 
-_Two sets are touching, if they intersect and their intersection only
- includes their boundaries.
- 
-- also the tangent vectors of both sets at the point(s) of intersection
- should point in the same direction.
-- also the intersection shall have at least 1 times less dimensionality
- than the maximum dimensionality of the two sets._ (difficult to define,
- clearer definition needed)
-- symmetric
+- __Prerequisites:__ `[ T** *** FF* ]`
+- __Describtion:__ A geometry __A__ _contains_ a geometry __B__, if:
+    - for every point __b__ in __B__, __b__ is also in __A__
+    - and at least one point __c__ in the interior of __B__ is also in the interior of __A__.
+- __Properties:__ 
+    - not symmetric
+    - If __A__ _equals_ __B__, __A__ must _contain_ __B__ and __B__ must _contain_ __A__.
 
+### `geom:overlaps`
 
-### geom:overlaps
+- __Prerequisites:__ 
+    - `dim(A) == dim(B)` _AND_ _IF_ `dim(A) == 1` _THEN_ `[ 1*T *** T** ]` _ELSE_ `[ T*T *** T** ]`
+- __Describtion:__ The geometries __A__ and __B__ are _overlapping_, if:
+    - __A__ _intersects_ __B__
+    - and the _dimension_ of the _intersection_ is the same as the _dimension_ of __A__ and __B__.
+- __Properties:__ 
+    - symmetric
+    - If __A__ _intersects_ __B__, but does not _touch_ __B__ nor _equals_ __B__, __A__ and __B__ must _overlap_.
 
-A set _A_ overlaps a set _B_, if _A_ intersects _B_ but _A_ does
- not touch _B_.
- 
-- _Also the intersection shall have at least the dimensionality of the
- minimum dimensionality of the two sets._
-- symmetric
+<!-- TODO -->
+### `geom:covers`
+### `geom:coveredBy`
+### `geom:within`, `geom:inside`
+### `geom:crosses`
 
+## Spatial Objects
+<!-- TODO -->
+<!-- ### `geom:Geometry` -->
+### `geom:Point`
+### `geom:MultiPoint`
+### `geom:LineString`
+### `geom:MultiLineString`
+### `geom:Polygon`
+### `geom:MultiPolygon`
+### `geom:GeometryCollection`
 
-#### Point
+<!-- TODO check all examples -->
+## Examples
 
-##### geom:disjoint
+### Point
+
+#### geom:disjoint
 
 ```
     . i
@@ -127,7 +148,7 @@ A set _A_ overlaps a set _B_, if _A_ intersects _B_ but _A_ does
 |---|---|---|:---|
 | **i**   | `disjoint` | **j**   | true  |
 
-##### geom:equals
+#### geom:equals
 
 ```
     (.) i, j
@@ -140,9 +161,9 @@ is in the same place as
 
 ---
 
-#### Polygon, (n > 2)
+### Polygon, (n > 2)
 
-##### geom:disjoint
+#### geom:disjoint
 
 ```
     .-----------.
@@ -165,7 +186,7 @@ is in the same place as
 
 ---
 
-##### geom:touches
+#### geom:touches
 
 ```
     .-----------.
@@ -200,7 +221,7 @@ is in the same place as
 
 ---
 
-##### geom:overlaps
+#### geom:overlaps
 
 ```
     .-----------.
@@ -220,7 +241,7 @@ is in the same place as
 
 ---
 
-##### geom:contains
+#### geom:contains
 
 ```
    (.)---------(.)
@@ -238,7 +259,7 @@ is in the same place as
 
 ---
 
-##### geom:equals
+#### geom:equals
 
 ```
    (.)---------(.)
@@ -254,9 +275,9 @@ is in the same place as
 
 ---
 
-#### Line
+### Line
 
-##### geom:disjoint
+#### geom:disjoint
 
 ```
                   (.)
@@ -274,7 +295,7 @@ is in the same place as
 |---|---|---|:---|
 | **i** | `disjoint` | **j** | true |
 
-##### geom:touches
+#### geom:touches
 
 ```
     .          (.)
@@ -304,7 +325,7 @@ is in the same place as
 |---|---|---|:---|
 | **i** | `touches` | **j** | true |
 
-##### geom:intersects
+#### geom:intersects
 
 ```
     .    (.)
@@ -323,7 +344,7 @@ is in the same place as
 | **i** | `overlaps`   | **j** | false |
 
 
-##### geom:overlaps
+#### geom:overlaps
 
 ```
     .
@@ -346,7 +367,7 @@ is in the same place as
 
 ---
 
-##### geom:contains
+#### geom:contains
 
 ```
     .
@@ -382,7 +403,7 @@ is in the same place as
 
 ---
 
-##### geom:equals
+#### geom:equals
 
 ```
     .
@@ -402,13 +423,3 @@ is in the same place as
 
 
 ---
-
-## Spatial Objects
-
-### Point
-### MultiPoint
-### LineString
-### MultiLineString
-### Polygon
-### MultiPolygon
-### GeometryCollection
