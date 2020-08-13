@@ -169,10 +169,6 @@ in this form to allow a better understanding of the requirements.
 
 ### `geom:Point`
 
-```
-*
-one point
-```
 ```json
 {
     "@type": "geom:Point",
@@ -180,14 +176,12 @@ one point
 }
 ```
 
-### `geom:MultiPoint`
 ```
-    *
-
-
 *
-two points
+one point
 ```
+
+### `geom:MultiPoint`
 
 ```json
 {
@@ -199,14 +193,15 @@ two points
 }
 ```
 
-### `geom:LineString`
+```
+    *
 
+
+*
+two points
 ```
-.---.
-|
-.
-one line around a corner
-```
+
+### `geom:LineString`
 
 ```json
 {
@@ -219,16 +214,14 @@ one line around a corner
 }
 ```
 
-### `geom:MultiLineString`
-
 ```
-    .---.
-    |
-.---*
+.---.
 |
 .
-two lines as a stair
+one line around a corner
 ```
+
+### `geom:MultiLineString`
 
 ```json
 {
@@ -245,16 +238,16 @@ two lines as a stair
 }
 ```
 
-### `geom:Polygon`
+```
+    .---.
+    |
+.---*
+|
+.
+two lines as a stair
+```
 
-```
-.-------.
-| .---. |  
-| |   | |
-| .---. |
-.-------.
-square with hole
-```
+### `geom:Polygon`
 
 ```json
 {
@@ -275,16 +268,16 @@ square with hole
 }
 ```
 
-### `geom:MultiPolygon`
+```
+.-------.
+| .---. |  
+| |   | |
+| .---. |
+.-------.
+square with hole
+```
 
-```
-     .----.
-     |    |
-.----.----.
-|    |
-.----.
-two squares corner on corner
-```
+### `geom:MultiPolygon`
 
 ```json
 {
@@ -305,14 +298,16 @@ two squares corner on corner
 }
 ```
 
-### `geom:GeometryCollection`
-
 ```
+     .----.
+     |    |
+.----.----.
+|    |
 .----.
-     |
-*    .
-point under a corner line
+two squares corner on corner
 ```
+
+### `geom:GeometryCollection`
 
 ```json
 {
@@ -329,6 +324,13 @@ point under a corner line
         ]
     }]
 }
+```
+
+```
+.----.
+     |
+*    .
+point under a corner line
 ```
 
 ## Examples
