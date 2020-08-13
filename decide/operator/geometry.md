@@ -153,6 +153,26 @@ in this form to allow a better understanding of the requirements.
     - transitive
     - opposite of _contains_
 
+#### ODRL
+
+```json
+{
+    "@context": {
+        "odrl": "http://www.w3.org/ns/odrl.jsonld",
+        "geom": "https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/operator/geometry.md"
+    },
+    "odrl:constraint": [{
+        "odrl:leftOperand": {
+            "@type": "geom:Point",
+            "geom:coords": [51.9500023, 7.4840148],
+            "geom:reference": { "@id": "http://dbpedia.org/page/Geographic_coordinate_system" }
+        },
+        "odrl:operator": "geom:inside",
+        "odrl:rightOperandReference": { "@id": "http://dbpedia.org/page/Germany" }
+    }]
+}
+```
+
 ### `geom:crosses`
 
 - __Prerequisite:__ _ONE OF_:
@@ -164,6 +184,11 @@ in this form to allow a better understanding of the requirements.
     - and the _dimension_ of the _intersection_ is less than the maximum _dimension_ of __A__ and __B__.
 - __Properties:__ 
     - symmetric
+
+## Spatial Properties
+<!-- TODO -->
+### `geom:coords`
+### `geom:reference`
 
 ## Spatial Objects
 
