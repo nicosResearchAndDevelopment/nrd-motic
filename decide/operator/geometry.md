@@ -11,7 +11,7 @@
 - [Topologische Beziehungen](http://www.gitta.info/SpatialQueries/de/html/TopoBasedOps_learningObject1.html)
 - [Simple Feature Access](https://www.ogc.org/standards/sfa)
 
-The `geom` is heavily inspired by the _Egenhofer Topology_ for two-dimensional spacial objects and the _Simple Features_ specifications that translate well into the _GeoJSON_ specification, especially for usage on the world wide web. Besides those you may find the _Region Connection Calculus (RCC8)_, although the `geom` currently does not adopt its definitions, as it only intruduces 2 more edge cases which are rarely useful.
+The `geom` is heavily inspired by the _Egenhofer Topology_ for two-dimensional spacial objects and the _Simple Features_ specifications that translate well into the _GeoJSON_ specification, especially for usage on the world wide web. Besides those you may find the _Region Connection Calculus (RCC8)_, but the `geom` currently does not adopt its definitions, as it only intruduces 2 more edge cases which are rarely useful and difficult to compute.
 
 ### DE-9IM
 
@@ -268,6 +268,7 @@ A use case would be to define a custom reference system relative to the layout o
 ### `geom:Geometry`
 
 - isAbstract: `true`
+- see: [geo:Geometry](https://tools.ietf.org/html/rfc7946#section-3.1)
 
 > A Geometry object represents points, curves, and surfaces in coordinate space. Every Geometry object is a GeoJSON object no matter where it occurs in a GeoJSON text.
 >
@@ -276,7 +277,8 @@ A use case would be to define a custom reference system relative to the layout o
 
 ### `geom:Point`
 
-- subClassOf: [GeoJSON:Point](https://tools.ietf.org/html/rfc7946#section-3.1.2)
+- subClassOf: `geom:Geometry`
+- see: [geo:Point](https://tools.ietf.org/html/rfc7946#section-3.1.2)
 
 > For type __Point__, the _coordinates_ member is a single position.
 
@@ -294,7 +296,8 @@ one point
 
 ### `geom:MultiPoint`
 
-- subClassOf: [GeoJSON:MultiPoint](https://tools.ietf.org/html/rfc7946#section-3.1.3)
+- subClassOf: `geom:Geometry`
+- see: [geo:MultiPoint](https://tools.ietf.org/html/rfc7946#section-3.1.3)
 
 > For type __MultiPoint__, the _coordinates_ member is an array of positions.
 
@@ -318,7 +321,8 @@ two points
 
 ### `geom:LineString`
 
-- subClassOf: [GeoJSON:LineString](https://tools.ietf.org/html/rfc7946#section-3.1.4)
+- subClassOf: `geom:Geometry`
+- see: [geo:LineString](https://tools.ietf.org/html/rfc7946#section-3.1.4)
 
 > For type __LineString__, the _coordinates_ member is an array of two or more positions.
 
@@ -342,7 +346,8 @@ one line around a corner
 
 ### `geom:MultiLineString`
 
-- subClassOf: [GeoJSON:MultiLineString](https://tools.ietf.org/html/rfc7946#section-3.1.5)
+- subClassOf: `geom:Geometry`
+- see: [geo:MultiLineString](https://tools.ietf.org/html/rfc7946#section-3.1.5)
 
 > For type __MultiLineString__, the _coordinates_ member is an array of LineString coordinate arrays.
 
@@ -372,7 +377,8 @@ two lines as a stair
 
 ### `geom:Polygon`
 
-- subClassOf: [GeoJSON:Polygon](https://tools.ietf.org/html/rfc7946#section-3.1.6)
+- subClassOf: `geom:Geometry`
+- see: [geo:Polygon](https://tools.ietf.org/html/rfc7946#section-3.1.6)
 
 > To specify a constraint specific to Polygons, it is useful to introduce the concept of a linear ring:
 > 
@@ -415,7 +421,8 @@ square with hole
 
 ### `geom:MultiPolygon`
 
-- subClassOf: [GeoJSON:MultiPolygon](https://tools.ietf.org/html/rfc7946#section-3.1.7)
+- subClassOf: `geom:Geometry`
+- see: [geo:MultiPolygon](https://tools.ietf.org/html/rfc7946#section-3.1.7)
 
 > For type __MultiPolygon__, the _coordinates_ member is an array of Polygon coordinate arrays.
 
@@ -449,7 +456,8 @@ two squares corner on corner
 
 ### `geom:GeometryCollection`
 
-- subClassOf: [GeoJSON:GeometryCollection](https://tools.ietf.org/html/rfc7946#section-3.1.8)
+- subClassOf: `geom:Geometry`
+- see: [geo:GeometryCollection](https://tools.ietf.org/html/rfc7946#section-3.1.8)
 
 > A GeoJSON object with type __GeometryCollection__ is a Geometry object. A GeometryCollection has a member with the name _geometries_. The value of _geometries_ is an array.  Each element of this array is a GeoJSON Geometry object.  It is possible for this array to be empty.
 
