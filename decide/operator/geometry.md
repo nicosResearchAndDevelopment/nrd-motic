@@ -55,10 +55,54 @@ This provides a way to categorize the relation between two sets, by simply denot
 
 ## Spatial Properties
 
-<!-- TODO -->
-### `geom:coords`
-### `geom:geoms`
+### `geom:coordinates`
+
+The `geom:coordinates` contains all relevant information about a geometries structure. It consists of a deep array tree with numbers as leafes. The structure is determined by the type of the geometry. All leaf numbers are part of a position array, containing at least two position coordinates, representing __x__ and __y__ on a coordinate plain. E.g. for a point (the smallest geometry type) this means the `geom:coordinates` member is an array with two points (or more).
+
+```json
+{
+    "@type": "geom:Point",
+    "geom:coordinates": [0, 0]
+}
+```
+
+### `geom:geometries`
+
+The `geom:geometries` identifies all members, that are part of a geometry collection. Those members themselfes must be one of the seven sub types of `geom:Geometry`.
+
+```json
+{
+    "@type": "geom:GeometryCollection",
+    "geom:geometries": [{
+        "@type": "geom:Point",
+        "geom:coordinates": [0, 0]
+    }, {
+        "@type": "geom:LineString",
+        "geom:coordinates": [
+            [1, 0],
+            [0, 1]
+        ]
+    }]
+}
+```
+
 ### `geom:reference`
+
+> The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) datum, with longitude and latitude units of decimal degrees. This is equivalent to the coordinate reference system identified by the Open Geospatial Consortium (OGC) URN urn:ogc:def:crs:OGC::CRS84. An OPTIONAL third-position element SHALL be the height in meters above or below the WGS 84 reference ellipsoid.  In the absence of elevation values, applications sensitive to height or depth SHOULD interpret positions as being at local ground or sea level.
+
+Note that the `geom:reference` is just a hint for interpreters, whether particular geometries are comparable. A conversion between reference systems is not inherintly provided. Also all calculations are based on two-dimensional geometries. That means map projections from a sphere cannot assume a logical connection between for example 180° east and 180° west. In cases that polygons span over it, they should be split into appropriate multi polygons along the edges.
+
+```json
+{
+    "@type": "geom:Point",
+    "geom:coordinates": [51.9500023, 7.4840148],
+    "geom:reference": { 
+        "@id": "http://dbpedia.org/page/Geographic_coordinate_system" 
+    }
+}
+```
+
+A use case would be to define a custom reference system relative to the layout of a building, with the origin on one corner and the coordinates represented in meters. All geometric properties still apply, as long as it is a two-dimensional euclidean topology.
 
 ## [Spatial Predicates](https://en.wikipedia.org/wiki/DE-9IM#Spatial_predicates)
 
@@ -94,6 +138,34 @@ This provides a way to categorize the relation between two sets, by simply denot
     - reflexive
     - symmetric
     - opposite of _disjoint_
+
+#### odrl:Constraint - geom:intersects
+
+```json
+{
+    "@context": {
+        "odrl": "http://www.w3.org/ns/odrl.jsonld",
+        "geom": "https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/operator/geometry.md"
+    },
+    "odrl:constraints": [{
+        "odrl:leftOperand": {
+            "@type": "geom:LineString",
+            "geom:coordinates": [
+                [0, 0],
+                [1, 1]
+            ]
+        },
+        "odrl:operator": "geom:intersects",
+        "odrl:rightOperand": {
+            "@type": "geom:LineString",
+            "geom:coordinates": [
+                [0, 1],
+                [1, 0]
+            ]
+        }
+    }]
+}
+```
 
 ### `geom:touches`, `geom:meets`
 
@@ -159,7 +231,7 @@ This provides a way to categorize the relation between two sets, by simply denot
     - transitive
     - opposite of _contains_
 
-#### ODRL
+#### odrl:Constraint - geom:inside
 
 ```json
 {
@@ -167,10 +239,10 @@ This provides a way to categorize the relation between two sets, by simply denot
         "odrl": "http://www.w3.org/ns/odrl.jsonld",
         "geom": "https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/operator/geometry.md"
     },
-    "odrl:constraint": [{
+    "odrl:constraints": [{
         "odrl:leftOperand": {
             "@type": "geom:Point",
-            "geom:coords": [51.9500023, 7.4840148],
+            "geom:coordinates": [51.9500023, 7.4840148],
             "geom:reference": { "@id": "http://dbpedia.org/page/Geographic_coordinate_system" }
         },
         "odrl:operator": "geom:inside",
@@ -193,11 +265,20 @@ This provides a way to categorize the relation between two sets, by simply denot
 
 ## [Spatial Objects](https://tools.ietf.org/html/rfc7946#section-3)
 
+### `geom:Geometry`
+
+- isAbstract: `true`
+
+> A Geometry object represents points, curves, and surfaces in coordinate space. Every Geometry object is a GeoJSON object no matter where it occurs in a GeoJSON text.
+>
+> - The value of a Geometry object's "type" member MUST be one of the seven geometry types (see Section 1.4).
+> - A GeoJSON Geometry object of any type other than __GeometryCollection__ has a member with the name _coordinates_. The value of the _coordinates_ member is an array. The structure of the elements in this array is determined by the type of geometry. GeoJSON processors MAY interpret Geometry objects with empty _coordinates_ arrays as null objects.
+
 ### `geom:Point`
 
 - subClassOf: [GeoJSON:Point](https://tools.ietf.org/html/rfc7946#section-3.1.2)
 
-For type __Point__, the _coordinates_ member is a single position.
+> For type __Point__, the _coordinates_ member is a single position.
 
 ```
 *
@@ -207,7 +288,7 @@ one point
 ```json
 {
     "@type": "geom:Point",
-    "geom:coords": [0, 0]
+    "geom:coordinates": [0, 0]
 }
 ```
 
@@ -215,7 +296,7 @@ one point
 
 - subClassOf: [GeoJSON:MultiPoint](https://tools.ietf.org/html/rfc7946#section-3.1.3)
 
-For type __MultiPoint__, the _coordinates_ member is an array of positions.
+> For type __MultiPoint__, the _coordinates_ member is an array of positions.
 
 ```
     *
@@ -228,7 +309,7 @@ two points
 ```json
 {
     "@type": "geom:MultiPoint",
-    "geom:coords": [
+    "geom:coordinates": [
         [0, 0],
         [1, 2]
     ]
@@ -239,7 +320,7 @@ two points
 
 - subClassOf: [GeoJSON:LineString](https://tools.ietf.org/html/rfc7946#section-3.1.4)
 
-For type __LineString__, the _coordinates_ member is an array of two or more positions.
+> For type __LineString__, the _coordinates_ member is an array of two or more positions.
 
 ```
 .---.
@@ -251,7 +332,7 @@ one line around a corner
 ```json
 {
     "@type": "geom:LineString",
-    "geom:coords": [
+    "geom:coordinates": [
         [0, 0],
         [0, 1],
         [1, 1]
@@ -263,7 +344,7 @@ one line around a corner
 
 - subClassOf: [GeoJSON:MultiLineString](https://tools.ietf.org/html/rfc7946#section-3.1.5)
 
-For type __MultiLineString__, the _coordinates_ member is an array of LineString coordinate arrays.
+> For type __MultiLineString__, the _coordinates_ member is an array of LineString coordinate arrays.
 
 ```
     .---.
@@ -277,7 +358,7 @@ two lines as a stair
 ```json
 {
     "@type": "geom:MultiLineString",
-    "geom:coords": [[
+    "geom:coordinates": [[
         [0, 0],
         [0, 1],
         [1, 1]
@@ -293,18 +374,16 @@ two lines as a stair
 
 - subClassOf: [GeoJSON:Polygon](https://tools.ietf.org/html/rfc7946#section-3.1.6)
 
-To specify a constraint specific to Polygons, it is useful to introduce the concept of a linear ring:
+> To specify a constraint specific to Polygons, it is useful to introduce the concept of a linear ring:
+> 
+> - A linear ring is a closed LineString with four or more positions. The first and last positions are equivalent, and they MUST contain identical values; their representation SHOULD also be identical.
+> - A linear ring is the boundary of a surface or the boundary of a hole in a surface.
+> - A linear ring MUST follow the right-hand rule with respect to the area it bounds, i.e., exterior rings are counterclockwise, and holes are clockwise.
 
-- A linear ring is a closed LineString with four or more positions. The first and last positions are equivalent, and they MUST contain identical values; their representation SHOULD also be identical.
-- A linear ring is the boundary of a surface or the boundary of a hole in a surface.
-- A linear ring MUST follow the right-hand rule with respect to the area it bounds, i.e., exterior rings are counterclockwise, and holes are clockwise.
-
-Note: the [GJ2008] specification did not discuss linear ring winding order.  For backwards compatibility, parsers SHOULD NOT reject Polygons that do not follow the right-hand rule.
-
-Though a linear ring is not explicitly represented as a GeoJSON geometry type, it leads to a canonical formulation of the Polygon geometry type definition as follows:
-
-- For type __Polygon__, the _coordinates_ member MUST be an array of linear ring coordinate arrays.
-- For Polygons with more than one of these rings, the first MUST be the exterior ring, and any others MUST be interior rings. The exterior ring bounds the surface, and the interior rings (if present) bound holes within the surface.
+> Though a linear ring is not explicitly represented as a GeoJSON geometry type, it leads to a canonical formulation of the Polygon geometry type definition as follows:
+> 
+> - For type __Polygon__, the _coordinates_ member MUST be an array of linear ring coordinate arrays.
+> - For Polygons with more than one of these rings, the first MUST be the exterior ring, and any others MUST be interior rings. The exterior ring bounds the surface, and the interior rings (if present) bound holes within the surface.
 
 ```
 .-------.
@@ -318,7 +397,7 @@ square with hole
 ```json
 {
     "@type": "geom:Polygon",
-    "geom:coords": [[
+    "geom:coordinates": [[
         [0, 0],
         [1, 0],
         [1, 1],
@@ -338,7 +417,7 @@ square with hole
 
 - subClassOf: [GeoJSON:MultiPolygon](https://tools.ietf.org/html/rfc7946#section-3.1.7)
 
-For type __MultiPolygon__, the _coordinates_ member is an array of Polygon coordinate arrays.
+> For type __MultiPolygon__, the _coordinates_ member is an array of Polygon coordinate arrays.
 
 ```
      .----.
@@ -352,7 +431,7 @@ two squares corner on corner
 ```json
 {
     "@type": "geom:MultiPolygon",
-    "geom:coords": [[[
+    "geom:coordinates": [[[
         [0, 0],
         [1, 0],
         [1, 1],
@@ -372,13 +451,13 @@ two squares corner on corner
 
 - subClassOf: [GeoJSON:GeometryCollection](https://tools.ietf.org/html/rfc7946#section-3.1.8)
 
-A GeoJSON object with type __GeometryCollection__ is a Geometry object. A GeometryCollection has a member with the name _geometries_. The value of _geometries_ is an array.  Each element of this array is a GeoJSON Geometry object.  It is possible for this array to be empty.
+> A GeoJSON object with type __GeometryCollection__ is a Geometry object. A GeometryCollection has a member with the name _geometries_. The value of _geometries_ is an array.  Each element of this array is a GeoJSON Geometry object.  It is possible for this array to be empty.
 
-Unlike the other geometry types described above, a GeometryCollection can be a heterogeneous composition of smaller Geometry objects. For example, a Geometry object in the shape of a lowercase roman "i" can be composed of one point and one LineString.
-
-GeometryCollections have a different syntax from single type Geometry objects (Point, LineString, and Polygon) and homogeneously typed multipart Geometry objects (MultiPoint, MultiLineString, and MultiPolygon) but have no different semantics.  Although a GeometryCollection object has no _coordinates_ member, it does have coordinates: the coordinates of all its parts belong to the collection.  The _geometries_ member of a GeometryCollection describes the parts of this composition.  Implementations SHOULD NOT apply any additional semantics to the _geometries_ array.
-
-To maximize interoperability, implementations SHOULD avoid nested GeometryCollections.  Furthermore, GeometryCollections composed of a single part or a number of parts of a single type SHOULD be avoided when that single part or a single object of multipart type (MultiPoint, MultiLineString, or MultiPolygon) could be used instead.
+> Unlike the other geometry types described above, a GeometryCollection can be a heterogeneous composition of smaller Geometry objects. For example, a Geometry object in the shape of a lowercase roman "i" can be composed of one point and one LineString.
+> 
+> GeometryCollections have a different syntax from single type Geometry objects (Point, LineString, and Polygon) and homogeneously typed multipart Geometry objects (MultiPoint, MultiLineString, and MultiPolygon) but have no different semantics.  Although a GeometryCollection object has no _coordinates_ member, it does have coordinates: the coordinates of all its parts belong to the collection.  The _geometries_ member of a GeometryCollection describes the parts of this composition.  Implementations SHOULD NOT apply any additional semantics to the _geometries_ array.
+> 
+> To maximize interoperability, implementations SHOULD avoid nested GeometryCollections.  Furthermore, GeometryCollections composed of a single part or a number of parts of a single type SHOULD be avoided when that single part or a single object of multipart type (MultiPoint, MultiLineString, or MultiPolygon) could be used instead.
 
 ```
 .----.
@@ -392,10 +471,10 @@ point under a corner line
     "@type": "geom:GeometryCollection",
     "geometries": [{
         "@type": "geom:Point",
-        "geom:coords": [0, 0]
+        "geom:coordinates": [0, 0]
     }, {
         "@type": "geom:LineString",
-        "geom:coords": [
+        "geom:coordinates": [
             [0, 1],
             [1, 1],
             [1, 0]
