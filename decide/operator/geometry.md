@@ -51,10 +51,16 @@ The topological dimension of _points_ is always __0__, of _lines_ __1__ and of g
 - DE9IM(b, d) = `[ TTT FTT FFT ]`
 - ...
 
-This provides a way to categorize the relation between two sets, by simply denoting a DE-9IM notation for the requirements of that relation. All following geometric operators will have a notation
-in this form to allow a better understanding of the requirements.
+This provides a way to categorize the relation between two sets, by simply denoting a DE-9IM notation for the requirements of that relation. All following geometric operators will have a notation in this form to allow a better understanding of the requirements.
 
-## Spatial Operators
+## Spatial Properties
+
+<!-- TODO -->
+### `geom:coords`
+### `geom:geoms`
+### `geom:reference`
+
+## [Spatial Predicates](https://en.wikipedia.org/wiki/DE-9IM#Spatial_predicates)
 
 ### `geom:equals`
 
@@ -185,14 +191,13 @@ in this form to allow a better understanding of the requirements.
 - __Properties:__ 
     - symmetric
 
-## Spatial Properties
-<!-- TODO -->
-### `geom:coords`
-### `geom:reference`
-
-## Spatial Objects
+## [Spatial Objects](https://tools.ietf.org/html/rfc7946#section-3)
 
 ### `geom:Point`
+
+- subClassOf: [GeoJSON:Point](https://tools.ietf.org/html/rfc7946#section-3.1.2)
+
+For type __Point__, the _coordinates_ member is a single position.
 
 ```
 *
@@ -207,6 +212,10 @@ one point
 ```
 
 ### `geom:MultiPoint`
+
+- subClassOf: [GeoJSON:MultiPoint](https://tools.ietf.org/html/rfc7946#section-3.1.3)
+
+For type __MultiPoint__, the _coordinates_ member is an array of positions.
 
 ```
     *
@@ -228,6 +237,10 @@ two points
 
 ### `geom:LineString`
 
+- subClassOf: [GeoJSON:LineString](https://tools.ietf.org/html/rfc7946#section-3.1.4)
+
+For type __LineString__, the _coordinates_ member is an array of two or more positions.
+
 ```
 .---.
 |
@@ -247,6 +260,10 @@ one line around a corner
 ```
 
 ### `geom:MultiLineString`
+
+- subClassOf: [GeoJSON:MultiLineString](https://tools.ietf.org/html/rfc7946#section-3.1.5)
+
+For type __MultiLineString__, the _coordinates_ member is an array of LineString coordinate arrays.
 
 ```
     .---.
@@ -273,6 +290,21 @@ two lines as a stair
 ```
 
 ### `geom:Polygon`
+
+- subClassOf: [GeoJSON:Polygon](https://tools.ietf.org/html/rfc7946#section-3.1.6)
+
+To specify a constraint specific to Polygons, it is useful to introduce the concept of a linear ring:
+
+- A linear ring is a closed LineString with four or more positions. The first and last positions are equivalent, and they MUST contain identical values; their representation SHOULD also be identical.
+- A linear ring is the boundary of a surface or the boundary of a hole in a surface.
+- A linear ring MUST follow the right-hand rule with respect to the area it bounds, i.e., exterior rings are counterclockwise, and holes are clockwise.
+
+Note: the [GJ2008] specification did not discuss linear ring winding order.  For backwards compatibility, parsers SHOULD NOT reject Polygons that do not follow the right-hand rule.
+
+Though a linear ring is not explicitly represented as a GeoJSON geometry type, it leads to a canonical formulation of the Polygon geometry type definition as follows:
+
+- For type __Polygon__, the _coordinates_ member MUST be an array of linear ring coordinate arrays.
+- For Polygons with more than one of these rings, the first MUST be the exterior ring, and any others MUST be interior rings. The exterior ring bounds the surface, and the interior rings (if present) bound holes within the surface.
 
 ```
 .-------.
@@ -304,6 +336,10 @@ square with hole
 
 ### `geom:MultiPolygon`
 
+- subClassOf: [GeoJSON:MultiPolygon](https://tools.ietf.org/html/rfc7946#section-3.1.7)
+
+For type __MultiPolygon__, the _coordinates_ member is an array of Polygon coordinate arrays.
+
 ```
      .----.
      |    |
@@ -333,6 +369,16 @@ two squares corner on corner
 ```
 
 ### `geom:GeometryCollection`
+
+- subClassOf: [GeoJSON:GeometryCollection](https://tools.ietf.org/html/rfc7946#section-3.1.8)
+
+A GeoJSON object with type __GeometryCollection__ is a Geometry object. A GeometryCollection has a member with the name _geometries_. The value of _geometries_ is an array.  Each element of this array is a GeoJSON Geometry object.  It is possible for this array to be empty.
+
+Unlike the other geometry types described above, a GeometryCollection can be a heterogeneous composition of smaller Geometry objects. For example, a Geometry object in the shape of a lowercase roman "i" can be composed of one point and one LineString.
+
+GeometryCollections have a different syntax from single type Geometry objects (Point, LineString, and Polygon) and homogeneously typed multipart Geometry objects (MultiPoint, MultiLineString, and MultiPolygon) but have no different semantics.  Although a GeometryCollection object has no _coordinates_ member, it does have coordinates: the coordinates of all its parts belong to the collection.  The _geometries_ member of a GeometryCollection describes the parts of this composition.  Implementations SHOULD NOT apply any additional semantics to the _geometries_ array.
+
+To maximize interoperability, implementations SHOULD avoid nested GeometryCollections.  Furthermore, GeometryCollections composed of a single part or a number of parts of a single type SHOULD be avoided when that single part or a single object of multipart type (MultiPoint, MultiLineString, or MultiPolygon) could be used instead.
 
 ```
 .----.
