@@ -43,7 +43,7 @@ As the dimension of the set varies, the boundary might not be all the same, e.g.
 | __Boundary(a)__ | 1 | 0 | 1 |
 | __Exterior(a)__ | 2 | 1 | 2 |
 
-The dimension of empty sets would be denoted -1, but there is a simpler and more often used boolean notation, which replaces all -1 with __F__ (false), all other numbers with __T__ (true) and all values that are irrelevant for a particular consideration are denoted with __*__ (any). Also the letters are flattened out to one line. With this we would get the following for a, b, c and d:
+The topological dimension of _points_ is always __0__, of _lines_ __1__ and of geometries _with an area_ __2__. The dimension of _empty sets_ would be denoted __-1__, but there is a simpler and more often used boolean notation, which replaces all -1 with __F__ (false), all other numbers with __T__ (true) and all values that are irrelevant for a particular consideration are denoted with __*__ (any). Also the letters are flattened out to one line. With this we would get the following for a, b, c and d:
 
 - DE9IM(a, b) = `[ TTT TTT TTT ]`
 - DE9IM(a, c) = `[ FFT FFT TTT ]`
@@ -58,36 +58,40 @@ in this form to allow a better understanding of the requirements.
 
 ### `geom:equals`
 
-- __Prerequisites:__ `[ T*F **F FF* ]`
+- __Prerequisite:__ `[ T*F **F FF* ]`
 - __Describtion:__ Two geometries __A__ and __B__ are _equal_, if:
     - for every point __a__ in __A__, __a__ is also in __B__
     - and for every point __b__ in __B__, __b__ is also in __A__.
 - __Properties:__
+    - reflexive
     - symmetric
-    - If __A__ _contains_ __B__ and __B__ _contains_ __A__, __A__ must be _equal_ to __B__.
+    - transitive
+    - If __A__ _contains_ __B__ and __A__ is _inside_ __B__, __A__ must be _equal_ to __B__.
 
 ### `geom:disjoint`
 
-- __Prerequisites:__ `[ FF* FF* *** ]`
+- __Prerequisite:__ `[ FF* FF* *** ]`
 - __Describtion:__ Two geometries __A__ and __B__ are _disjoint_, if:
     - for every point __a__ in __A__, __a__ is not in __B__.
 - __Properties:__ 
+    - anti reflexive
     - symmetric
     - opposite of _intersects_
 
 
 ### `geom:intersects`
 
-- __Prerequisites:__ `[ T** *** *** ]` _OR_ `[ *T* *** *** ]` _OR_ `[ *** T** *** ]` _OR_ `[ *** *T* *** ]`
+- __Prerequisite:__ `[ T** *** *** ]` _OR_ `[ *T* *** *** ]` _OR_ `[ *** T** *** ]` _OR_ `[ *** *T* *** ]`
 - __Describtion:__ Two geometries __A__ and __B__ _intersect_, if:
     - their exists at least one point __a__ in __A__, that is also in __B__.
 - __Properties:__
+    - reflexive
     - symmetric
     - opposite of _disjoint_
 
 ### `geom:touches`, `geom:meets`
 
-- __Prerequisites:__ `[ FT* *** *** ]` _OR_ `[ F** T** *** ]` _OR_ `[ F** *T* *** ]`
+- __Prerequisite:__ `[ FT* *** *** ]` _OR_ `[ F** T** *** ]` _OR_ `[ F** *T* *** ]`
 - __Describtion:__ Two geometries __A__ and __B__ are _touching_, if:
     - for every point __a__ in the interior of __A__, __a__ is not in the interior of __B__
     - and at least one point __c__ on the boundary of __A__ is on the boundary of __B__.
@@ -96,18 +100,19 @@ in this form to allow a better understanding of the requirements.
 
 ### `geom:contains`
 
-- __Prerequisites:__ `[ T** *** FF* ]`
+- __Prerequisite:__ `[ T** *** FF* ]`
 - __Describtion:__ A geometry __A__ _contains_ a geometry __B__, if:
     - for every point __b__ in __B__, __b__ is also in __A__
     - and at least one point __c__ in the interior of __B__ is also in the interior of __A__.
 - __Properties:__ 
-    - not symmetric
+    - transitive
     - If __A__ _equals_ __B__, __A__ must _contain_ __B__ and __B__ must _contain_ __A__.
 
 ### `geom:overlaps`
 
-- __Prerequisites:__ 
-    - `dim(A) == dim(B)` _AND_ _IF_ `dim(A) == 1` _THEN_ `[ 1*T *** T** ]` _ELSE_ `[ T*T *** T** ]`
+- __Prerequisite:__ `dim(A) == dim(B)` _AND_ _ONE OF_:
+    - `dim(A) == 1` _AND_ `[ 1*T *** T** ]`
+    - `dim(A) != 1` _AND_ `[ T*T *** T** ]`
 - __Describtion:__ The geometries __A__ and __B__ are _overlapping_, if:
     - __A__ _intersects_ __B__
     - and the _dimension_ of the _intersection_ is the same as the _dimension_ of __A__ and __B__.
@@ -115,24 +120,217 @@ in this form to allow a better understanding of the requirements.
     - symmetric
     - If __A__ _intersects_ __B__, but does not _touch_ __B__ nor _equals_ __B__, __A__ and __B__ must _overlap_.
 
-<!-- TODO -->
 ### `geom:covers`
+
+- __Prerequisite:__ `[ T** *** FF* ]` _OR_ `[ *T* *** FF* ]` _OR_ `[ *** T** FF* ]` _OR_ `[ *** *T* FF* ]`
+- __Describtion:__ A geometry __A__ _covers_ a geometry __B__, if:
+    - at least one point __b__ in __B__ is also in __A__
+    - and there exists no point in __B__, which is in the exterior of __A__.
+- __Properties:__ 
+    - reflexive
+    - transitive
+    - opposite of _coveredBy_
+
 ### `geom:coveredBy`
-### `geom:within`, `geom:inside`
+
+- __Prerequisite:__ `[ T*F **F *** ]` _OR_ `[ *TF **F *** ]` _OR_ `[ **F T*F *** ]` _OR_ `[ **F *TF *** ]`
+- __Describtion:__ A geometry __A__ is _coveredBy_ a geometry __B__, if:
+    - at least one point __a__ in __A__ is also in __B__
+    - and there exists no point in __A__, which is in the exterior of __B__.
+- __Properties:__ 
+    - reflexive
+    - transitive
+    - opposite of _covers_
+
+### `geom:inside`, `geom:within`
+
+- __Prerequisite:__ `[ T*F **F *** ]`
+- __Describtion:__ A geometry __A__ is _inside_ a geometry __B__, if:
+    - for every point __a__ in __A__, __a__ is not in the exterior of __B__
+    - and at least one point __c__ in __A__ is also in the interior of __B__.
+- __Properties:__ 
+    - reflexive
+    - transitive
+    - opposite of _contains_
+
 ### `geom:crosses`
 
+- __Prerequisite:__ _ONE OF_:
+    - `dim(A) < dim(B)` _AND_ `[ T*T *** *** ]`
+    - `dim(A) > dim(B)` _AND_ `[ T** *** T** ]`
+    - `dim(A) == 1 || dim(B) == 1` _AND_ `[ 0** *** *** ]`
+- __Describtion:__ A geometry __A__ _crosses_ a geometry __B__, if:
+    - __A__ intersects __B__
+    - and the _dimension_ of the _intersection_ is less than the maximum _dimension_ of __A__ and __B__.
+- __Properties:__ 
+    - symmetric
+
 ## Spatial Objects
-<!-- TODO -->
-<!-- ### `geom:Geometry` -->
+
 ### `geom:Point`
+
+```
+*
+one point
+```
+```json
+{
+    "type": "Point",
+    "coordinates": [0, 0]
+}
+```
+
 ### `geom:MultiPoint`
+```
+    *
+
+
+*
+two points
+```
+
+```json
+{
+    "type": "MultiPoint",
+    "coordinates": [
+        [0, 0],
+        [1, 2]
+    ]
+}
+```
+
 ### `geom:LineString`
+
+```
+.---.
+|
+.
+one line
+```
+
+```json
+{
+    "type": "LineString",
+    "coordinates": [
+        [0, 0],
+        [0, 1],
+        [1, 1]
+    ]
+}
+```
+
 ### `geom:MultiLineString`
+
+```
+    .---.
+    |
+.---*
+|
+.
+two lines
+```
+
+```json
+{
+    "type": "MultiLineString",
+    "coordinates": [[
+        [0, 0],
+        [0, 1],
+        [1, 1]
+    ], [
+        [1, 1],
+        [1, 2],
+        [2, 2]
+    ]]
+}
+```
+
 ### `geom:Polygon`
+
+```
+.-------.
+| .---. |  
+| |   | |
+| .---. |
+.-------.
+square with hole
+```
+
+```json
+{
+    "type": "Polygon",
+    "coordinates": [[
+        [0, 0],
+        [1, 0],
+        [1, 1],
+        [0, 1],
+        [0, 0]
+    ], [
+        [0.2, 0.2],
+        [0.8, 0.2],
+        [0.8, 0.8],
+        [0.2, 0.8],
+        [0.2, 0.2]
+    ]]
+}
+```
+
 ### `geom:MultiPolygon`
+
+```
+     .----.
+     |    |
+.----.----.
+|    |
+.----.
+two squares
+```
+
+```json
+{
+    "type": "MultiPolygon",
+    "coordinates": [[[
+        [0, 0],
+        [1, 0],
+        [1, 1],
+        [0, 1],
+        [0, 0]
+    ]], [[
+        [1, 1],
+        [2, 1],
+        [2, 2],
+        [1, 2],
+        [1, 1]
+    ]]]
+}
+```
+
 ### `geom:GeometryCollection`
 
-<!-- TODO check all examples -->
+```
+.----.
+     |
+*    .
+dot and a line
+```
+
+```json
+{
+    "type": "GeometryCollection",
+    "geometries": [{
+        "type": "Point",
+        "coordinates": [0, 0]
+    }, {
+        "type": "LineString",
+        "coordinates": [
+            [0, 1],
+            [1, 1],
+            [1, 0]
+        ]
+    }]
+}
+```
+
 ## Examples
 
 ### Point
@@ -396,10 +594,10 @@ is in the same place as
 |   |   |   | is|  
 |---|---|---|:---|
 | **i** | `contains`   | **j** | true  |
-| **i** | `overlaps`   | **j** | true  |
 | **i** | `intersects` | **j** | true  |
 | *but* |              |       |       |
 | **i** | `touches`    | **j** | false |
+| **i** | `overlaps`   | **j** | false  |
 
 ---
 
@@ -417,9 +615,10 @@ is in the same place as
 |   |   |   | is|
 |---|---|---|:---|
 | **i** | `equals`   | **j** | true  |
-| **i** | `overlaps` | **j** | true  |
 | **i** | `contains` | **j** | true  |
 | **j** | `contains` | **i** | true  |
+| *but* |              |       |       |
+| **i** | `overlaps` | **j** | false  |
 
 
 ---
