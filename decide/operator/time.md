@@ -141,8 +141,6 @@ Before( "2019-01-05T00:00:00Z", [ "2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z"
 }
 ```
 
-
-
 ---
 
 ### time:After
@@ -160,14 +158,68 @@ After( "2019-04-01T00:00:00Z", [ "2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z" 
 | "2019-04-01T00:00:00Z" | `After`     | [ "2019-02-01T00:00:00Z", "P1M" ] | true   |
 
 ### time:Meets
+
+###### Example
+A `time:Interval` `meets` a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+Meets( [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ], [ "2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z" ]) = true
+```
+
 ### time:MetBy
 ### time:Overlaps
+
+###### Example
+A `time:Interval` `overlaps` a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+Overlaps( [ "2019-01-01T00:00:00Z", "2019-03-01T00:00:00Z" ], [ "2019-02-01T00:00:00Z", "2019-04-01T00:00:00Z" ]) = true
+```
+
 ### time:OverlappedBy
 ### time:Starts
+
+###### Example
+A `time:Instant` `starts` a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+Starts( "2019-01-01T00:00:00Z", [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ]) = true
+```
+
 ### time:StartedBy
 ### time:During
+
+###### Example
+A `time:Interval` is `during` a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+During( [ "2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z" ], [ "2019-01-01T00:00:00Z", "2019-04-01T00:00:00Z" ] ) = true
+```
+
 ### time:Contains
+
+###### Example
+A `time:Interval` `contains` a `time:Instant`.
+
+###### pseudocode
+```pseudocode
+Contains( [ "2019-01-01T00:00:00Z", "2019-03-01T00:00:00Z" ], "2019-02-01T00:00:00Z" ) = true
+```
+
 ### time:Finishes
+
+###### Example
+A `time:Instant` `finishes` a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+Finishes( "2019-02-01T00:00:00Z", [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ]) = true
+```
+
 ### time:FinishedBy
 
 ### time:Equals

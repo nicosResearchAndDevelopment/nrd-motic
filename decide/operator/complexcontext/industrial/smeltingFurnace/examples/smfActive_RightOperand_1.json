@@ -7,8 +7,10 @@
     }
   ],
   "uid": "http://www.nicos-rd.com/smeltingfurnace/active",
-  "REMARK_1": "@type :: subClass of odrl:Rule ",
-  "@type": "smf:Definition",
+  "REMARK_1": "smf:ContextQualityDefinition :: subClass of odrl:Rule ",
+  "@type": "smf:ContextQualityDefinition",
+  "rdfs:label": "active",
+  "rdf:description": "active",
   "constraint": [
     "REMARK_1 : NLP :: ",
     {
