@@ -184,6 +184,7 @@ A use case would be to define a custom reference system relative to the layout o
     - and at least one point __c__ in the interior of __B__ is also in the interior of __A__.
 - __Properties:__ 
     - transitive
+    - reverse of _inside_, _within_
     - If __A__ _equals_ __B__, __A__ must _contain_ __B__ and __B__ must _contain_ __A__.
 
 ### `geom:overlaps`
@@ -207,7 +208,7 @@ A use case would be to define a custom reference system relative to the layout o
 - __Properties:__ 
     - reflexive
     - transitive
-    - opposite of _coveredBy_
+    - reverse of _coveredBy_
 
 ### `geom:coveredBy`
 
@@ -218,7 +219,7 @@ A use case would be to define a custom reference system relative to the layout o
 - __Properties:__ 
     - reflexive
     - transitive
-    - opposite of _covers_
+    - reverse of _covers_
 
 ### `geom:inside`, `geom:within`
 
@@ -229,7 +230,7 @@ A use case would be to define a custom reference system relative to the layout o
 - __Properties:__ 
     - reflexive
     - transitive
-    - opposite of _contains_
+    - reverse of _contains_
 
 #### odrl:Constraint - geom:inside
 
