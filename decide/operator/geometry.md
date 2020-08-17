@@ -53,217 +53,6 @@ The topological dimension of _points_ is always __0__, of _lines_ __1__ and of g
 
 This provides a way to categorize the relation between two sets, by simply denoting a DE-9IM notation for the requirements of that relation. All following geometric operators will have a notation in this form to allow a better understanding of the requirements.
 
-## Spatial Properties
-
-### `geom:coordinates`
-
-The `geom:coordinates` contains all relevant information about a geometries structure. It consists of a deep array tree with numbers as leafes. The structure is determined by the type of the geometry. All leaf numbers are part of a position array, containing at least two position coordinates, representing __x__ and __y__ on a coordinate plain. E.g. for a point (the smallest geometry type) this means the `geom:coordinates` member is an array with two points (or more).
-
-```json
-{
-    "@type": "geom:Point",
-    "geom:coordinates": [0, 0]
-}
-```
-
-### `geom:geometries`
-
-The `geom:geometries` identifies all members, that are part of a geometry collection. Those members themselfes must be one of the seven sub types of `geom:Geometry`.
-
-```json
-{
-    "@type": "geom:GeometryCollection",
-    "geom:geometries": [{
-        "@type": "geom:Point",
-        "geom:coordinates": [0, 0]
-    }, {
-        "@type": "geom:LineString",
-        "geom:coordinates": [
-            [1, 0],
-            [0, 1]
-        ]
-    }]
-}
-```
-
-### `geom:reference`
-
-> The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) datum, with longitude and latitude units of decimal degrees. This is equivalent to the coordinate reference system identified by the Open Geospatial Consortium (OGC) URN urn:ogc:def:crs:OGC::CRS84. An OPTIONAL third-position element SHALL be the height in meters above or below the WGS 84 reference ellipsoid.  In the absence of elevation values, applications sensitive to height or depth SHOULD interpret positions as being at local ground or sea level.
-
-Note that the `geom:reference` is just a hint for interpreters, whether particular geometries are comparable. A conversion between reference systems is not inherintly provided. Also all calculations are based on two-dimensional geometries. That means map projections from a sphere cannot assume a logical connection between for example 180° east and 180° west. In cases that polygons span over it, they should be split into appropriate multi polygons along the edges.
-
-```json
-{
-    "@type": "geom:Point",
-    "geom:coordinates": [51.9500023, 7.4840148],
-    "geom:reference": { 
-        "@id": "http://dbpedia.org/page/Geographic_coordinate_system" 
-    }
-}
-```
-
-A use case would be to define a custom reference system relative to the layout of a building, with the origin on one corner and the coordinates represented in meters. All geometric properties still apply, as long as it is a two-dimensional euclidean topology.
-
-## [Spatial Predicates](https://en.wikipedia.org/wiki/DE-9IM#Spatial_predicates)
-
-### `geom:equals`
-
-- __Prerequisite:__ `[ T*F **F FF* ]`
-- __Describtion:__ Two geometries __A__ and __B__ are _equal_, if:
-    - for every point __a__ in __A__, __a__ is also in __B__
-    - and for every point __b__ in __B__, __b__ is also in __A__.
-- __Properties:__
-    - reflexive
-    - symmetric
-    - transitive
-    - If __A__ _contains_ __B__ and __A__ is _inside_ __B__, __A__ must be _equal_ to __B__.
-
-### `geom:disjoint`
-
-- __Prerequisite:__ `[ FF* FF* *** ]`
-- __Describtion:__ Two geometries __A__ and __B__ are _disjoint_, if:
-    - for every point __a__ in __A__, __a__ is not in __B__.
-- __Properties:__ 
-    - anti reflexive
-    - symmetric
-    - opposite of _intersects_
-
-
-### `geom:intersects`
-
-- __Prerequisite:__ `[ T** *** *** ]` _OR_ `[ *T* *** *** ]` _OR_ `[ *** T** *** ]` _OR_ `[ *** *T* *** ]`
-- __Describtion:__ Two geometries __A__ and __B__ _intersect_, if:
-    - their exists at least one point __a__ in __A__, that is also in __B__.
-- __Properties:__
-    - reflexive
-    - symmetric
-    - opposite of _disjoint_
-
-#### odrl:Constraint - geom:intersects
-
-```json
-{
-    "@context": {
-        "odrl": "http://www.w3.org/ns/odrl.jsonld",
-        "geom": "https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/operator/geometry.md"
-    },
-    "odrl:constraints": [{
-        "odrl:leftOperand": {
-            "@type": "geom:LineString",
-            "geom:coordinates": [
-                [0, 0],
-                [1, 1]
-            ]
-        },
-        "odrl:operator": "geom:intersects",
-        "odrl:rightOperand": {
-            "@type": "geom:LineString",
-            "geom:coordinates": [
-                [0, 1],
-                [1, 0]
-            ]
-        }
-    }]
-}
-```
-
-### `geom:touches`, `geom:meets`
-
-- __Prerequisite:__ `[ FT* *** *** ]` _OR_ `[ F** T** *** ]` _OR_ `[ F** *T* *** ]`
-- __Describtion:__ Two geometries __A__ and __B__ are _touching_, if:
-    - for every point __a__ in the interior of __A__, __a__ is not in the interior of __B__
-    - and at least one point __c__ on the boundary of __A__ is on the boundary of __B__.
-- __Properties:__ 
-    - symmetric
-
-### `geom:contains`
-
-- __Prerequisite:__ `[ T** *** FF* ]`
-- __Describtion:__ A geometry __A__ _contains_ a geometry __B__, if:
-    - for every point __b__ in __B__, __b__ is also in __A__
-    - and at least one point __c__ in the interior of __B__ is also in the interior of __A__.
-- __Properties:__ 
-    - transitive
-    - reverse of _inside_, _within_
-    - If __A__ _equals_ __B__, __A__ must _contain_ __B__ and __B__ must _contain_ __A__.
-
-### `geom:overlaps`
-
-- __Prerequisite:__ `dim(A) == dim(B)` _AND_ _ONE OF_:
-    - `dim(A) == 1` _AND_ `[ 1*T *** T** ]`
-    - `dim(A) != 1` _AND_ `[ T*T *** T** ]`
-- __Describtion:__ The geometries __A__ and __B__ are _overlapping_, if:
-    - __A__ _intersects_ __B__
-    - and the _dimension_ of the _intersection_ is the same as the _dimension_ of __A__ and __B__.
-- __Properties:__ 
-    - symmetric
-    - If __A__ _intersects_ __B__, but does not _touch_ __B__ nor _equals_ __B__, __A__ and __B__ must _overlap_.
-
-### `geom:covers`
-
-- __Prerequisite:__ `[ T** *** FF* ]` _OR_ `[ *T* *** FF* ]` _OR_ `[ *** T** FF* ]` _OR_ `[ *** *T* FF* ]`
-- __Describtion:__ A geometry __A__ _covers_ a geometry __B__, if:
-    - at least one point __b__ in __B__ is also in __A__
-    - and there exists no point in __B__, which is in the exterior of __A__.
-- __Properties:__ 
-    - reflexive
-    - transitive
-    - reverse of _coveredBy_
-
-### `geom:coveredBy`
-
-- __Prerequisite:__ `[ T*F **F *** ]` _OR_ `[ *TF **F *** ]` _OR_ `[ **F T*F *** ]` _OR_ `[ **F *TF *** ]`
-- __Describtion:__ A geometry __A__ is _coveredBy_ a geometry __B__, if:
-    - at least one point __a__ in __A__ is also in __B__
-    - and there exists no point in __A__, which is in the exterior of __B__.
-- __Properties:__ 
-    - reflexive
-    - transitive
-    - reverse of _covers_
-
-### `geom:inside`, `geom:within`
-
-- __Prerequisite:__ `[ T*F **F *** ]`
-- __Describtion:__ A geometry __A__ is _inside_ a geometry __B__, if:
-    - for every point __a__ in __A__, __a__ is not in the exterior of __B__
-    - and at least one point __c__ in __A__ is also in the interior of __B__.
-- __Properties:__ 
-    - reflexive
-    - transitive
-    - reverse of _contains_
-
-#### odrl:Constraint - geom:inside
-
-```json
-{
-    "@context": {
-        "odrl": "http://www.w3.org/ns/odrl.jsonld",
-        "geom": "https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/operator/geometry.md"
-    },
-    "odrl:constraints": [{
-        "odrl:leftOperand": {
-            "@type": "geom:Point",
-            "geom:coordinates": [51.9500023, 7.4840148],
-            "geom:reference": { "@id": "http://dbpedia.org/page/Geographic_coordinate_system" }
-        },
-        "odrl:operator": "geom:inside",
-        "odrl:rightOperandReference": { "@id": "http://dbpedia.org/page/Germany" }
-    }]
-}
-```
-
-### `geom:crosses`
-
-- __Prerequisite:__ _ONE OF_:
-    - `dim(A) < dim(B)` _AND_ `[ T*T *** *** ]`
-    - `dim(A) > dim(B)` _AND_ `[ T** *** T** ]`
-    - `dim(A) == 1 || dim(B) == 1` _AND_ `[ 0** *** *** ]`
-- __Describtion:__ A geometry __A__ _crosses_ a geometry __B__, if:
-    - __A__ intersects __B__
-    - and the _dimension_ of the _intersection_ is less than the maximum _dimension_ of __A__ and __B__.
-- __Properties:__ 
-    - symmetric
-
 ## [Spatial Objects](https://tools.ietf.org/html/rfc7946#section-3)
 
 ### `geom:Geometry`
@@ -491,6 +280,217 @@ point under a corner line
     }]
 }
 ```
+
+## Spatial Properties
+
+### `geom:coordinates`
+
+The `geom:coordinates` contains all relevant information about a geometries structure. It consists of a deep array tree with numbers as leafes. The structure is determined by the type of the geometry. All leaf numbers are part of a position array, containing at least two position coordinates, representing __x__ and __y__ on a coordinate plain. E.g. for a point (the smallest geometry type) this means the `geom:coordinates` member is an array with two points (or more).
+
+```json
+{
+    "@type": "geom:Point",
+    "geom:coordinates": [0, 0]
+}
+```
+
+### `geom:geometries`
+
+The `geom:geometries` identifies all members, that are part of a geometry collection. Those members themselfes must be one of the seven sub types of `geom:Geometry`.
+
+```json
+{
+    "@type": "geom:GeometryCollection",
+    "geom:geometries": [{
+        "@type": "geom:Point",
+        "geom:coordinates": [0, 0]
+    }, {
+        "@type": "geom:LineString",
+        "geom:coordinates": [
+            [1, 0],
+            [0, 1]
+        ]
+    }]
+}
+```
+
+### `geom:reference`
+
+> The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) datum, with longitude and latitude units of decimal degrees. This is equivalent to the coordinate reference system identified by the Open Geospatial Consortium (OGC) URN urn:ogc:def:crs:OGC::CRS84. An OPTIONAL third-position element SHALL be the height in meters above or below the WGS 84 reference ellipsoid.  In the absence of elevation values, applications sensitive to height or depth SHOULD interpret positions as being at local ground or sea level.
+
+Note that the `geom:reference` is just a hint for interpreters, whether particular geometries are comparable. A conversion between reference systems is not inherintly provided. Also all calculations are based on two-dimensional geometries. That means map projections from a sphere cannot assume a logical connection between for example 180° east and 180° west. In cases that polygons span over it, they should be split into appropriate multi polygons along the edges.
+
+```json
+{
+    "@type": "geom:Point",
+    "geom:coordinates": [51.9500023, 7.4840148],
+    "geom:reference": { 
+        "@id": "http://dbpedia.org/page/Geographic_coordinate_system" 
+    }
+}
+```
+
+A use case would be to define a custom reference system relative to the layout of a building, with the origin on one corner and the coordinates represented in meters. All geometric properties still apply, as long as it is a two-dimensional euclidean topology.
+
+## [Spatial Predicates](https://en.wikipedia.org/wiki/DE-9IM#Spatial_predicates)
+
+### `geom:equals`
+
+- __Prerequisite:__ `[ T*F **F FF* ]`
+- __Describtion:__ Two geometries __A__ and __B__ are _equal_, if:
+    - for every point __a__ in __A__, __a__ is also in __B__
+    - and for every point __b__ in __B__, __b__ is also in __A__.
+- __Properties:__
+    - reflexive
+    - symmetric
+    - transitive
+    - If __A__ _contains_ __B__ and __A__ is _inside_ __B__, __A__ must be _equal_ to __B__.
+
+### `geom:disjoint`
+
+- __Prerequisite:__ `[ FF* FF* *** ]`
+- __Describtion:__ Two geometries __A__ and __B__ are _disjoint_, if:
+    - for every point __a__ in __A__, __a__ is not in __B__.
+- __Properties:__ 
+    - anti reflexive
+    - symmetric
+    - opposite of _intersects_
+
+
+### `geom:intersects`
+
+- __Prerequisite:__ `[ T** *** *** ]` _OR_ `[ *T* *** *** ]` _OR_ `[ *** T** *** ]` _OR_ `[ *** *T* *** ]`
+- __Describtion:__ Two geometries __A__ and __B__ _intersect_, if:
+    - their exists at least one point __a__ in __A__, that is also in __B__.
+- __Properties:__
+    - reflexive
+    - symmetric
+    - opposite of _disjoint_
+
+#### odrl:Constraint - geom:intersects
+
+```json
+{
+    "@context": {
+        "odrl": "http://www.w3.org/ns/odrl.jsonld",
+        "geom": "https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/operator/geometry.md"
+    },
+    "odrl:constraints": [{
+        "odrl:leftOperand": {
+            "@type": "geom:LineString",
+            "geom:coordinates": [
+                [0, 0],
+                [1, 1]
+            ]
+        },
+        "odrl:operator": "geom:intersects",
+        "odrl:rightOperand": {
+            "@type": "geom:LineString",
+            "geom:coordinates": [
+                [0, 1],
+                [1, 0]
+            ]
+        }
+    }]
+}
+```
+
+### `geom:touches`, `geom:meets`
+
+- __Prerequisite:__ `[ FT* *** *** ]` _OR_ `[ F** T** *** ]` _OR_ `[ F** *T* *** ]`
+- __Describtion:__ Two geometries __A__ and __B__ are _touching_, if:
+    - for every point __a__ in the interior of __A__, __a__ is not in the interior of __B__
+    - and at least one point __c__ on the boundary of __A__ is on the boundary of __B__.
+- __Properties:__ 
+    - symmetric
+
+### `geom:contains`
+
+- __Prerequisite:__ `[ T** *** FF* ]`
+- __Describtion:__ A geometry __A__ _contains_ a geometry __B__, if:
+    - for every point __b__ in __B__, __b__ is also in __A__
+    - and at least one point __c__ in the interior of __B__ is also in the interior of __A__.
+- __Properties:__ 
+    - transitive
+    - reverse of _inside_, _within_
+    - If __A__ _equals_ __B__, __A__ must _contain_ __B__ and __B__ must _contain_ __A__.
+
+### `geom:overlaps`
+
+- __Prerequisite:__ `dim(A) == dim(B)` _AND_ _ONE OF_:
+    - `dim(A) == 1` _AND_ `[ 1*T *** T** ]`
+    - `dim(A) != 1` _AND_ `[ T*T *** T** ]`
+- __Describtion:__ The geometries __A__ and __B__ are _overlapping_, if:
+    - __A__ _intersects_ __B__
+    - and the _dimension_ of the _intersection_ is the same as the _dimension_ of __A__ and __B__.
+- __Properties:__ 
+    - symmetric
+    - If __A__ _intersects_ __B__, but does not _touch_ __B__ nor _equals_ __B__, __A__ and __B__ must _overlap_.
+
+### `geom:covers`
+
+- __Prerequisite:__ `[ T** *** FF* ]` _OR_ `[ *T* *** FF* ]` _OR_ `[ *** T** FF* ]` _OR_ `[ *** *T* FF* ]`
+- __Describtion:__ A geometry __A__ _covers_ a geometry __B__, if:
+    - at least one point __b__ in __B__ is also in __A__
+    - and there exists no point in __B__, which is in the exterior of __A__.
+- __Properties:__ 
+    - reflexive
+    - transitive
+    - reverse of _coveredBy_
+
+### `geom:coveredBy`
+
+- __Prerequisite:__ `[ T*F **F *** ]` _OR_ `[ *TF **F *** ]` _OR_ `[ **F T*F *** ]` _OR_ `[ **F *TF *** ]`
+- __Describtion:__ A geometry __A__ is _coveredBy_ a geometry __B__, if:
+    - at least one point __a__ in __A__ is also in __B__
+    - and there exists no point in __A__, which is in the exterior of __B__.
+- __Properties:__ 
+    - reflexive
+    - transitive
+    - reverse of _covers_
+
+### `geom:inside`, `geom:within`
+
+- __Prerequisite:__ `[ T*F **F *** ]`
+- __Describtion:__ A geometry __A__ is _inside_ a geometry __B__, if:
+    - for every point __a__ in __A__, __a__ is not in the exterior of __B__
+    - and at least one point __c__ in __A__ is also in the interior of __B__.
+- __Properties:__ 
+    - reflexive
+    - transitive
+    - reverse of _contains_
+
+#### odrl:Constraint - geom:inside
+
+```json
+{
+    "@context": {
+        "odrl": "http://www.w3.org/ns/odrl.jsonld",
+        "geom": "https://github.com/nicosResearchAndDevelopment/nrd-motic/blob/master/decide/operator/geometry.md"
+    },
+    "odrl:constraints": [{
+        "odrl:leftOperand": {
+            "@type": "geom:Point",
+            "geom:coordinates": [51.9500023, 7.4840148],
+            "geom:reference": { "@id": "http://dbpedia.org/page/Geographic_coordinate_system" }
+        },
+        "odrl:operator": "geom:inside",
+        "odrl:rightOperandReference": { "@id": "http://dbpedia.org/page/Germany" }
+    }]
+}
+```
+
+### `geom:crosses`
+
+- __Prerequisite:__ _ONE OF_:
+    - `dim(A) < dim(B)` _AND_ `[ T*T *** *** ]`
+    - `dim(A) > dim(B)` _AND_ `[ T** *** T** ]`
+    - `dim(A) == 1 || dim(B) == 1` _AND_ `[ 0** *** *** ]`
+- __Describtion:__ A geometry __A__ _crosses_ a geometry __B__, if:
+    - __A__ intersects __B__
+    - and the _dimension_ of the _intersection_ is less than the maximum _dimension_ of __A__ and __B__.
+- __Properties:__ 
+    - symmetric
 
 ## Examples
 
