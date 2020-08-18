@@ -53,6 +53,17 @@ The topological dimension of _points_ is always __0__, of _lines_ __1__ and of g
 
 This provides a way to categorize the relation between two sets, by simply denoting a DE-9IM notation for the requirements of that relation. All geometric operators/predicates below will have a notation in this form to allow a better understanding of the requirements.
 
+### Dimension of shapes
+
+| Shape | Dim | Interior | Boundary |
+|---|---|---|---|
+| _Empty_ | __-1__ | Empty. | Empty. |
+| _Points_ | __0__ | All of the points. | Empty. |
+| _Lines_ | __1__ | All points inside the lines except single endpoints. | End points that are not inside a line. Lines could have no boundary, if all endpoints connect together. |
+| _Areas_ | __2__ | All points inside an area. | All points along all edges of an area. |
+
+__Note:__ The exterior contains always all other points/areas that are nether part of the interior nor the boundary.
+
 ## Spatial Properties
 
 ### `geom:coordinates`
@@ -90,7 +101,7 @@ The `geom:geometries` identifies all members, that are part of a geometry collec
 
 > The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) datum, with longitude and latitude units of decimal degrees. This is equivalent to the coordinate reference system identified by the Open Geospatial Consortium (OGC) URN urn:ogc:def:crs:OGC::CRS84. An OPTIONAL third-position element SHALL be the height in meters above or below the WGS 84 reference ellipsoid.  In the absence of elevation values, applications sensitive to height or depth SHOULD interpret positions as being at local ground or sea level.
 
-Note that the `geom:reference` is just a hint for interpreters, whether particular geometries are comparable. A conversion between reference systems is not inherintly provided. Also all calculations are based on two-dimensional geometries. That means map projections from a sphere cannot assume a logical connection between for example 180° east and 180° west. In cases that polygons span over it, they should be split into appropriate multi polygons along the edges.
+__Note:__ The `geom:reference` is just a hint for interpreters, whether particular geometries are comparable. A conversion between reference systems is not inherintly provided. Also all calculations are based on two-dimensional geometries. That means map projections from a sphere cannot assume a logical connection between for example 180° east and 180° west. In cases that polygons span over it, they should be split into appropriate multi polygons along the edges.
 
 ```json
 {
