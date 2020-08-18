@@ -69,7 +69,7 @@ A period of time (here: one day)
 ```
 [ "2019-04-01T00:00:00Z", "2019-04-02T00:00:00Z" ]
 ```
-The beginning of an interval **`MUST`** be placed before or equal to the end of it.
+The beginning of an interval **MUST** be placed before or equal to the end of it.
 
 A period of time (here: 0 seconds)
 ```
@@ -83,8 +83,7 @@ A period of time (here: one day)
 [ "2019-04-01T00:00:00Z", "2019-05-01T00:00:00Z" ]
 ```
 
-The beginning of a proper interval **`MUST`** be placed before the end of it. So
- it can **`NOT`** take `0 seconds`!!!
+The beginning of a proper interval **MUST** be placed before the end of it. So it can **NOT** take `0 seconds`!!!
 
 ---
 
@@ -168,6 +167,15 @@ Meets( [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ], [ "2019-02-01T00:00:0
 ```
 
 ### time:MetBy
+
+###### Example
+A `time:Interval` is `metBy` a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+MetBy( [ "2019-02-01T00:00:00Z", "2019-03-01T00:00:00Z" ], [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ]) = true
+```
+
 ### time:Overlaps
 
 ###### Example
@@ -179,6 +187,15 @@ Overlaps( [ "2019-01-01T00:00:00Z", "2019-03-01T00:00:00Z" ], [ "2019-02-01T00:0
 ```
 
 ### time:OverlappedBy
+
+###### Example
+A `time:Interval` is `overlappedBy` a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+Overlaps([ "2019-02-01T00:00:00Z", "2019-04-01T00:00:00Z" ], [ "2019-01-01T00:00:00Z", "2019-03-01T00:00:00Z" ]) = true
+```
+
 ### time:Starts
 
 ###### Example
@@ -190,6 +207,15 @@ Starts( "2019-01-01T00:00:00Z", [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z"
 ```
 
 ### time:StartedBy
+
+###### Example
+A `time:Interval` is `startedBy` a `time:Instant`.
+
+###### pseudocode
+```pseudocode
+Starts([ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ], "2019-01-01T00:00:00Z" ) = true
+```
+
 ### time:During
 
 ###### Example
@@ -222,6 +248,14 @@ Finishes( "2019-02-01T00:00:00Z", [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00
 
 ### time:FinishedBy
 
+###### Example
+A `time:Interval` is `finishedBy` a `time:Instant`.
+
+###### pseudocode
+```pseudocode
+Finishes([ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ], "2019-02-01T00:00:00Z" ) = true
+```
+
 ### time:Equals
 
 ##### Example
@@ -238,6 +272,23 @@ Equals("2019-04-01T00:00:00Z", "2019-04-01T00:00:00Z") = true
 | "2019-04-01T00:00:00Z" | `Equals`     | "2019-04-01T00:00:00Z" | true   |
 
 ### time:In
+
+###### Example
+A `time:Interval` is `in` a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+Finishes( [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ], [ "2019-01-01T00:00:00Z", "2019-03-01T00:00:00Z" ]) = true
+```
+
 ### time:Disjoint
+
+###### Example
+A `time:Interval` is `disjoint` with a `time:Interval`.
+
+###### pseudocode
+```pseudocode
+Finishes( [ "2019-01-01T00:00:00Z", "2019-02-01T00:00:00Z" ], [ "2019-03-01T00:00:00Z", "2019-04-01T00:00:00Z" ]) = true
+```
 
 ---
