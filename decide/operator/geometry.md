@@ -51,7 +51,58 @@ The topological dimension of _points_ is always __0__, of _lines_ __1__ and of g
 - DE9IM(b, d) = `[ TTT FTT FFT ]`
 - ...
 
-This provides a way to categorize the relation between two sets, by simply denoting a DE-9IM notation for the requirements of that relation. All following geometric operators will have a notation in this form to allow a better understanding of the requirements.
+This provides a way to categorize the relation between two sets, by simply denoting a DE-9IM notation for the requirements of that relation. All geometric operators/predicates below will have a notation in this form to allow a better understanding of the requirements.
+
+## Spatial Properties
+
+### `geom:coordinates`
+
+The `geom:coordinates` contains all relevant information about a geometries structure. It consists of a deep array tree with numbers as leafes. The structure is determined by the type of the geometry. All leaf numbers are part of a position array, containing at least two position coordinates, representing __x__ and __y__ on a coordinate plain. E.g. for a point (the smallest geometry type) this means the `geom:coordinates` member is an array with two points (or more).
+
+```json
+{
+    "@type": "geom:Point",
+    "geom:coordinates": [0, 0]
+}
+```
+
+### `geom:geometries`
+
+The `geom:geometries` identifies all members, that are part of a geometry collection. Those members themselfes must be one of the seven sub types of `geom:Geometry`.
+
+```json
+{
+    "@type": "geom:GeometryCollection",
+    "geom:geometries": [{
+        "@type": "geom:Point",
+        "geom:coordinates": [0, 0]
+    }, {
+        "@type": "geom:LineString",
+        "geom:coordinates": [
+            [1, 0],
+            [0, 1]
+        ]
+    }]
+}
+```
+
+### `geom:reference`
+
+> The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) datum, with longitude and latitude units of decimal degrees. This is equivalent to the coordinate reference system identified by the Open Geospatial Consortium (OGC) URN urn:ogc:def:crs:OGC::CRS84. An OPTIONAL third-position element SHALL be the height in meters above or below the WGS 84 reference ellipsoid.  In the absence of elevation values, applications sensitive to height or depth SHOULD interpret positions as being at local ground or sea level.
+
+Note that the `geom:reference` is just a hint for interpreters, whether particular geometries are comparable. A conversion between reference systems is not inherintly provided. Also all calculations are based on two-dimensional geometries. That means map projections from a sphere cannot assume a logical connection between for example 180° east and 180° west. In cases that polygons span over it, they should be split into appropriate multi polygons along the edges.
+
+```json
+{
+    "@type": "geom:Point",
+    "geom:coordinates": [51.9500023, 7.4840148],
+    "geom:reference": { 
+        "@id": "http://dbpedia.org/page/Geographic_coordinate_system" 
+    }
+}
+```
+
+A use case would be to define a custom reference system relative to the layout of a building, with the origin on one corner and the coordinates represented in meters. All geometric properties still apply, as long as it is a two-dimensional euclidean topology.
 
 ## [Spatial Objects](https://tools.ietf.org/html/rfc7946#section-3)
 
@@ -280,57 +331,6 @@ point under a corner line
     }]
 }
 ```
-
-## Spatial Properties
-
-### `geom:coordinates`
-
-The `geom:coordinates` contains all relevant information about a geometries structure. It consists of a deep array tree with numbers as leafes. The structure is determined by the type of the geometry. All leaf numbers are part of a position array, containing at least two position coordinates, representing __x__ and __y__ on a coordinate plain. E.g. for a point (the smallest geometry type) this means the `geom:coordinates` member is an array with two points (or more).
-
-```json
-{
-    "@type": "geom:Point",
-    "geom:coordinates": [0, 0]
-}
-```
-
-### `geom:geometries`
-
-The `geom:geometries` identifies all members, that are part of a geometry collection. Those members themselfes must be one of the seven sub types of `geom:Geometry`.
-
-```json
-{
-    "@type": "geom:GeometryCollection",
-    "geom:geometries": [{
-        "@type": "geom:Point",
-        "geom:coordinates": [0, 0]
-    }, {
-        "@type": "geom:LineString",
-        "geom:coordinates": [
-            [1, 0],
-            [0, 1]
-        ]
-    }]
-}
-```
-
-### `geom:reference`
-
-> The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) datum, with longitude and latitude units of decimal degrees. This is equivalent to the coordinate reference system identified by the Open Geospatial Consortium (OGC) URN urn:ogc:def:crs:OGC::CRS84. An OPTIONAL third-position element SHALL be the height in meters above or below the WGS 84 reference ellipsoid.  In the absence of elevation values, applications sensitive to height or depth SHOULD interpret positions as being at local ground or sea level.
-
-Note that the `geom:reference` is just a hint for interpreters, whether particular geometries are comparable. A conversion between reference systems is not inherintly provided. Also all calculations are based on two-dimensional geometries. That means map projections from a sphere cannot assume a logical connection between for example 180° east and 180° west. In cases that polygons span over it, they should be split into appropriate multi polygons along the edges.
-
-```json
-{
-    "@type": "geom:Point",
-    "geom:coordinates": [51.9500023, 7.4840148],
-    "geom:reference": { 
-        "@id": "http://dbpedia.org/page/Geographic_coordinate_system" 
-    }
-}
-```
-
-A use case would be to define a custom reference system relative to the layout of a building, with the origin on one corner and the coordinates represented in meters. All geometric properties still apply, as long as it is a two-dimensional euclidean topology.
 
 ## [Spatial Predicates](https://en.wikipedia.org/wiki/DE-9IM#Spatial_predicates)
 
