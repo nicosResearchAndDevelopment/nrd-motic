@@ -8,10 +8,9 @@
 
 ---
 
-## motic.data
+## motic.control
 
-Data flow control for import and export scenarios, data validation,
- aggregation and conversions are shown [here](./data/README.md).
+[Here](./control).
 
 ---
 

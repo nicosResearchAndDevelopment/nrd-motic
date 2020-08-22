@@ -54,22 +54,7 @@
 
 ## Use cases
 
-### Access Control
-
----
-
-### Dataflow Control
-
----
-
-### Status Control
-
----
-
-### Usage Control
-
-Use case [motic.IDS "*IDS usage control*"](../ids/ids-usage-control/README.md) regarding specifications done by
- [International Data Spaces (**IDS**)](https://https://www.internationaldataspaces.org/).
+There are several use cases driven by motic.decide, all shown [here](../control).
 
 ---
 
