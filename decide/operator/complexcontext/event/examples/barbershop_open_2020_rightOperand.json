@@ -8,7 +8,7 @@
     }
   ],
   "uid": "{{root}}/examples/barbershop_open_2020_rightOperand.json",
-  "@type": "event:ContextQualityDefinition",
+  "@type": "event:Definition",
   "constraint": [
     {
       "odrl:and": {
