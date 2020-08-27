@@ -6,10 +6,15 @@
 
 This is a more crisp usage of `environment`
 
+### [requirement](./requirement/requirement.md)
+
+Examine a set of resources, so it fulfills someone's
+ [requirements](./requirement/requirement.md).
+
 ### [smelting furnace](./industrial/smeltingFurnace/)
 
-Not so different from `weather` (temperature is also done), but a use case with
- a little bit more of *industrial* flavor...
+Not so different from `weather` (temperature is also done),
+ but a use case with a little bit more of *industrial* flavor...
    
 ## [event](./event/event.md)
 
