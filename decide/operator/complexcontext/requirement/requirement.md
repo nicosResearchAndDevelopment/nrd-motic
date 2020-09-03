@@ -66,7 +66,7 @@ All assets (here: services as an asset collection) will be examined if fulfillin
                 {
                     "leftOperand": "month",
                     "operator": "odrl:eq",
-                    "rightOperand": { "@value": "2020", "@type": "xsd:gMonth" }
+                    "rightOperand": { "@value": "9", "@type": "xsd:gMonth" }
                 },
                 {
                      "leftOperand": "service",
