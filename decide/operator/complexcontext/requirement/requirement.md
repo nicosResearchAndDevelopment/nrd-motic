@@ -1,19 +1,20 @@
-# `validation` Binary Operators
 
-## REMARK
-
-- DRAFT only, don't watch out for the semantic and/or correct URIs
-- very buggy so far, not understoo totally...
+# `requirement` Binary Operators
 
 ## Requirement
 
 A very interesting and not seldom used context.
 
-- Prefix: `val`
+- Prefix: `req`
 
 
-### `val:probe`
+### `req:probe`
 
+The `req:probe` of given environment will be translated to a refinement of given
+ asset collection. This refinement is a
+ [`odrl:Constraint`](https://www.w3.org/TR/odrl-model/#constraint-class) or 
+ [`odrl:LogicalConstraint`](https://www.w3.org/TR/odrl-model/#constraint-logical), so
+ more clever refinements could be expressed. 
 
 ```json
 {
@@ -24,9 +25,11 @@ A very interesting and not seldom used context.
             "xsd":     "http://www.w3.org/2001/XMLSchema#"
         }
     ],
-    "@id":         "https://www.nicos-rd.com/validation/validation_42",
-    "@type":       "val:DAT_sub",
-    "@value": 		"skiaki"
+    "@id":         "http://www.nicos-rd.com/requirements/requirement_42",
+    "@type":       "req:probe",
+    "req:service": {"@type": "xsd:string", "@value": "VPN" },
+    "req:year":    {"@type": "xsd:gYear", "@value": 2020 },
+    "req:month":   {"@type": "xsd:gMonth", "@value": 8 }
 }
 ```
 
@@ -36,35 +39,45 @@ A very interesting and not seldom used context.
 
 The use case:
 
-> 
+> Do services fullfill users requirements, or
+> "What are all the services meeting this user's requirement of providing 'VPN'?".
+>
+
+All assets (here: services as an asset collection) will be examined if fulfilling
+ having requested feature: 
 
 ```json
 {
     "@context": "http://www.w3.org/ns/odrl.jsonld",
-    "@type": "val:Validation",
-    "uid": "http://example.com/policy:6161",
-    "profile": "http://example.com/odrl:profile:10",
-    "validation": [{
-       "target": "https://www.nicos-rd.com/validation/validation_42",
-       "assigner": "http://example.com/org:616",
-       "action": [
-	   	{
-          "rdf:value": { "@id": "val:accept" },
-          "refinement": [{
-             "leftOperand": "@value",
-             "operator": "val:DAT_eq",
-             "rightOperand": { "@value": "skiaki", "@type": "val:DAT" },
-             "unit": "http://dbpedia.org/resource/DAT_sub"
-          },
-		  {
-          "rdf:value": { "@id": "val:decline" },
-          "refinement": [{
-             "leftOperand": "@value",
-             "operator": "val:DAT_not",
-             "rightOperand": { "@value": "DAT", "@type": "val:DAT" },
-             "unit": "http://dbpedia.org/resource/DAT_sub"
-		 }
-		  ]
+    "@type": "Offer",
+    "uid": "https://example.com/policy:42",
+    "profile": "https://gaia-x/odrl:profile:42",
+    "permission": [{
+       "assigner": "https://www.gaia-x.com/participant:nicos",
+       "assignee": "https://example.com",
+       "target": {
+          "@type": "AssetCollection",
+          "source":  "https://gaia-x.com/ecosystem/services",
+          "refinement": [
+                {
+                    "leftOperand": "year",
+                    "operator": "odrl:eq",
+                    "rightOperand": { "@value": "2020", "@type": "xsd:gYear" }
+                },
+                {
+                    "leftOperand": "month",
+                    "operator": "odrl:eq",
+                    "rightOperand": { "@value": "9", "@type": "xsd:gMonth" }
+                },
+                {
+                     "leftOperand": "service",
+                     "operator": "odrl:eq",
+                     "rightOperand": { "@value": "VPN", "@type": "xsd:string" }
+                }
+          ]
+      },
+      "action": [{
+         "rdf:value": { "@id": "odrl:use" }    
       }]
    }]
 }

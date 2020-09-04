@@ -34,7 +34,9 @@ Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
 
 Handling some more complicated and advanced contexts.
 
-### [environment](./complexcontext/environment/environment.md)
+#### [validation](./complexcontext/validation/validation.md)
+
+#### [environment](./complexcontext/environment/environment.md)
 
 #### [weather](./complexcontext/weather/weather.md)
 
