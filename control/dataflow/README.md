@@ -16,7 +16,7 @@
 		  "@id": "1/types/xsd/boolean",
 		  "leftOperand": "value",
 		  "operator": "fua-d:isType",
-		  "rightOperand": "xsd:Boolean"
+		  "rightOperand": "xsd:boolean"
 		  //"action": "fua-d:typeTransformBooleanToInteger"
       }],
 	  "valueValidation": [{
@@ -24,7 +24,7 @@
 		  "leftOperand": "value",
 		  "operator": "fua-d:veq", // value equals
 		  "rightOperand": true,
-		  "unit": "xsd:Boolean"
+		  "unit": "xsd:boolean"
 	  }],
 	  
     }]
