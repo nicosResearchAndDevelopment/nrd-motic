@@ -30,26 +30,26 @@ Binary operators regarding `foaf:Agent` and it's sub-class `foaf:Group`.
 
 ---
 
-## [Complex Context](./complexcontext)
+## [Complex Context](./complexcontext/)
 
 Handling some more complicated and advanced contexts.
 
-#### [validation](./complexcontext/validation/validation.md)
+#### [validation](./complexcontext/validation/)
 
-#### [environment](./complexcontext/environment/environment.md)
+#### [environment](./complexcontext/environment/)
 
-#### [weather](./complexcontext/weather/weather.md)
+#### [weather](./complexcontext/weather/)
 
 #### [smelting furnace](./complexcontext/industrial/smeltingFurnace/)
 
 This is a more crisp usage of `environment`
 
-#### [event](./complexcontext/event/event.md)
+#### [event](./complexcontext/event/)
 
 Here you will find some interesting use cases around context `time`.
  Something begins, has an ending and maybe has some discontinuities...
 
-#### [purpose](./complexcontext/purpose/purpose.md)
+#### [purpose](./complexcontext/purpose/)
 
 The badest kind of a "binary operator", not solved, so far...
 
