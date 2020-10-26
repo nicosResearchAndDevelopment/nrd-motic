@@ -23,4 +23,6 @@ Not so different from `weather` (temperature is also done),
  [*accident*](./event/README.md#accident) and a very complex
  use case called [*barbershop*](./event/README.md#barbershop). 
 
+## [purpose](./purpose/)
+
 ---
