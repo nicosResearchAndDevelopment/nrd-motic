@@ -30,5 +30,11 @@
 [International Data Spaces](https://www.internationaldataspaces.org) (IDS) technologies and implementations done by
  nicos are shown [here](./ids/README.md).
 
+## motic.DID
+
+
+[Decentralized Identity](./did/).
+
+
 ---
 
